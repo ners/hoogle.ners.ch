@@ -1,4 +1,9 @@
 {
+  nixConfig = {
+    extra-substituters = "https://cache.ners.ch/haskell";
+    extra-trusted-public-keys = "haskell:WskuxROW5pPy83rt3ZXnff09gvnu80yovdeKDw5Gi3o=";
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     imgui = {
@@ -44,6 +49,13 @@
         rhine.follows = "rhine";
       };
     };
+    rhine-chat = {
+      url = "github:ners/rhine-chat";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rhine.follows = "rhine";
+      };
+    };
     rhine-linux = {
       url = "github:ners/rhine-linux";
       inputs = {
@@ -63,9 +75,16 @@
   outputs = inputs:
     with builtins;
     let
+      inherit (inputs.nixpkgs) lib;
+      foreach = xs: f: with lib; foldr recursiveUpdate { } (
+        if isList xs then map f xs
+        else if isAttrs xs then mapAttrsToList f xs
+        else throw "foreach: expected list or attrset but got ${typeOf xs}"
+      );
       overlay = final: prev:
         let inherit (prev) lib; in
         lib.composeManyExtensions [
+          inputs.rhine-chat.overlays.default
           inputs.rhine-linux.overlays.default
           inputs.rhine-sdl2.overlays.default
           inputs.dosh.overlays.default
@@ -178,153 +197,169 @@
         ]
           final
           prev;
-    in
-    {
-      overlays.default = overlay;
-      nixosModules.default = { pkgs, lib, ... }:
-        let
-          pkgs' = pkgs.extend overlay;
-          fixPackage = drv: with pkgs.haskell.lib.compose; lib.pipe drv [ doHaddock ];
-          fixedPackages = map fixPackage;
-        in
+      packagesFor = pkgs: with pkgs.haskellPackages;
+        let fixPackage = drv: lib.pipe drv [ pkgs.haskell.lib.compose.doHaddock ]; in
+        map fixPackage [
+          #discord-haskell-voice
+          #shakebook
+          GLFW-b
+          QuickCheck
+          aeson
+          ansi-terminal
+          brick
+          brick-skylighting
+          clash-ghc
+          clash-shake
+          data-default
+          data-fix
+          dhall
+          dhall-csv
+          dhall-recursive-adt
+          dhall-toml
+          dhall-yaml
+          discord-haskell
+          dosh
+          either
+          ekg
+          esqueleto
+          extra
+          file-embed
+          fir
+          generic-arbitrary
+          generic-lens
+          generic-lens-lite
+          generic-optics
+          generic-optics-lite
+          ghc-syntax-highlighter
+          github
+          github-rest
+          greskell
+          greskell-websocket
+          hashable
+          hinotify
+          hnix
+          hspec
+          http-media
+          http-types
+          i3ipc
+          inline-c
+          inline-c-cpp
+          json-rpc
+          lens
+          lens-family-th
+          lens-time
+          lifted-base
+          lrucaching-haxl
+          lsp-client
+          lsp-test
+          matrix-client
+          megaparsec
+          microlens
+          microlens-th
+          mighttpd2
+          monad-control
+          monad-logger
+          monad-logger-aeson
+          monad-metrics
+          morpheus-graphql
+          morpheus-graphql-client
+          morpheus-graphql-server
+          morpheus-graphql-subscriptions
+          notifications-tray-icon
+          opaleye
+          openapi3
+          optics
+          optparse-applicative
+          pango
+          parser-combinators
+          path
+          path-io
+          pretty-simple
+          prettyprinter
+          process-extras
+          random
+          random-fu
+          rattle
+          rediscaching-haxl
+          rhine-dbus
+          rhine-i3
+          rhine-inotify
+          rhine-sdl2
+          rhine-terminal
+          rhine-udev
+          rhine-v4l2
+          rio
+          sdl2-image
+          sdl2-mixer
+          sdl2-ttf
+          servant-blaze
+          servant-client
+          servant-multipart-client
+          servant-openapi3
+          servant-quickcheck
+          servant-serialization
+          servant-server
+          shake
+          shake-bench
+          shake-c
+          shake-cabal
+          shake-dhall
+          shake-ext
+          shake-language-c
+          shake-literate
+          shake-path
+          shake-persist
+          shelly
+          skylighting
+          slick
+          stm-containers
+          stroll
+          syntax
+          syntax-attoparsec
+          syntax-printer
+          telegram-bot-simple
+          text-rope-zipper
+          these
+          turtle
+          unliftio
+          unordered-containers
+          uuid
+          vec
+          vec-lens
+          vector
+          vty
+          vulkan
+          vulkan-utils
+          wai
+          wai-extra
+          wai-logger
+          wai-websockets
+          warp
+          websockets
+        ];
+      nixosModule = { pkgs, ... }:
+        let pkgs' = pkgs.extend overlay; in
         {
           services.hoogle = {
             inherit (pkgs') haskellPackages;
-            packages = hp: with hp; fixedPackages [
-              #discord-haskell-voice
-              #shakebook
-              GLFW-b
-              QuickCheck
-              aeson
-              ansi-terminal
-              attoparsec
-              brick
-              brick-skylighting
-              clash-ghc
-              clash-shake
-              data-default
-              data-fix
-              dhall
-              dhall-csv
-              dhall-recursive-adt
-              dhall-toml
-              dhall-yaml
-              discord-haskell
-              dosh
-              either
-              ekg
-              extra
-              file-embed
-              fir
-              generic-arbitrary
-              generic-lens
-              generic-lens-lite
-              generic-optics
-              generic-optics-lite
-              ghc-syntax-highlighter
-              github
-              github-rest
-              greskell
-              greskell-websocket
-              hashable
-              haxl
-              hinotify
-              hnix
-              hspec
-              http-media
-              http-types
-              i3ipc
-              inline-c
-              inline-c-cpp
-              json-rpc
-              lens
-              lens-family-th
-              lens-time
-              lifted-base
-              lsp-client
-              lsp-test
-              megaparsec
-              microlens
-              microlens-th
-              mighttpd2
-              monad-control
-              monad-logger
-              monad-logger-aeson
-              monad-metrics
-              morpheus-graphql
-              morpheus-graphql-client
-              morpheus-graphql-server
-              morpheus-graphql-subscriptions
-              notifications-tray-icon
-              openapi3
-              optics
-              optparse-applicative
-              pango
-              parser-combinators
-              path
-              path-io
-              pretty-simple
-              prettyprinter
-              process-extras
-              random
-              random-fu
-              rattle
-              rhine-dbus
-              rhine-i3
-              rhine-inotify
-              rhine-sdl2
-              rhine-terminal
-              rhine-udev
-              rhine-v4l2
-              rio
-              sdl2-image
-              sdl2-mixer
-              sdl2-ttf
-              servant-blaze
-              servant-client
-              servant-multipart-client
-              servant-openapi3
-              servant-quickcheck
-              servant-serialization
-              servant-server
-              shake
-              shake-bench
-              shake-c
-              shake-cabal
-              shake-dhall
-              shake-ext
-              shake-language-c
-              shake-literate
-              shake-path
-              shake-persist
-              shelly
-              skylighting
-              slick
-              stm-containers
-              stroll
-              syntax
-              syntax-attoparsec
-              syntax-printer
-              text-rope-zipper
-              these
-              turtle
-              unliftio
-              unordered-containers
-              uuid
-              vec
-              vec-lens
-              vector
-              vty
-              vulkan
-              vulkan-utils
-              wai
-              wai-extra
-              wai-logger
-              wai-websockets
-              warp
-              websockets
-            ];
+            packages = _: packagesFor pkgs';
           };
         };
-    };
+    in
+    {
+      overlays.default = overlay;
+      nixosModules.default = nixosModule;
+    }
+    //
+    foreach inputs.nixpkgs.legacyPackages (system: pkgs:
+      let pkgs' = pkgs.extend overlay; in
+      {
+        formatter.${system} = pkgs.nixpkgs-fmt;
+        legacyPackages.${system} = pkgs.extend overlay;
+        packages.${system}.default = pkgs.symlinkJoin {
+          name = "hoogle-packages";
+          paths = map (lib.getOutput "doc") (packagesFor pkgs');
+        };
+      }
+    );
 }

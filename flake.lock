@@ -164,11 +164,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1729665710,
-        "narHash": "sha256-AlcmCXJZPIlO5dmFzV3V2XF6x/OpNWUV8Y/FMPGd8Z4=",
+        "lastModified": 1730200266,
+        "narHash": "sha256-l253w0XMT8nWHGXuXqyiIC/bMvh1VRszGXgdpQlfhvU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "2768c7d042a37de65bb1b5b3268fc987e534c49d",
+        "rev": "807e9154dcb16384b1b765ebe9cd2bba2ac287fd",
         "type": "github"
       },
       "original": {
@@ -201,16 +201,39 @@
         ]
       },
       "locked": {
-        "lastModified": 1729784538,
-        "narHash": "sha256-B0uVB11S9eaknvoTnBT13pCAQxbspNAq4H6s9et+5Lo=",
+        "lastModified": 1730103800,
+        "narHash": "sha256-k8f/RyGg3aUIkhPMO1JxnyKquDn/Kx1jGDlhAlQHiIU=",
         "owner": "turion",
         "repo": "rhine",
-        "rev": "4f6f3b831170bd7061cb08c4151970f6b6c3eaa3",
+        "rev": "fcaec156c02842db803113e1242a79065aa527ce",
         "type": "github"
       },
       "original": {
         "owner": "turion",
         "repo": "rhine",
+        "type": "github"
+      }
+    },
+    "rhine-chat": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rhine": [
+          "rhine"
+        ]
+      },
+      "locked": {
+        "lastModified": 1730322222,
+        "narHash": "sha256-50alA9KcH+FxE/ufN4j9yRs4ieM8UAFakHfU5Ez0oLQ=",
+        "owner": "ners",
+        "repo": "rhine-chat",
+        "rev": "e134df712e14425ee8cd045f289c43f69bc9dab9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ners",
+        "repo": "rhine-chat",
         "type": "github"
       }
     },
@@ -273,6 +296,7 @@
         "nixpkgs": "nixpkgs",
         "opus": "opus",
         "rhine": "rhine",
+        "rhine-chat": "rhine-chat",
         "rhine-linux": "rhine-linux",
         "rhine-sdl2": "rhine-sdl2",
         "stroll": "stroll",
