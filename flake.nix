@@ -7,7 +7,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     imgui = {
-      url = "github:ocornut/imgui/v1.89.9";
+      url = "github:ocornut/imgui/v1.90.9";
       flake = false;
     };
     rhine = {
