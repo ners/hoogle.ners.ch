@@ -30,6 +30,12 @@
       url = "git+https://gitlab.com/sheaf/fir.git";
       flake = false;
     };
+    inline-rust = {
+      url = "github:ners/inline-rust";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     stroll = {
       url = "github:snowleopard/stroll";
       flake = false;
@@ -84,10 +90,11 @@
       overlay = final: prev:
         let inherit (prev) lib; in
         lib.composeManyExtensions [
+          inputs.dosh.overlays.default
+          inputs.inline-rust.overlays.default
           inputs.rhine-chat.overlays.default
           inputs.rhine-linux.overlays.default
           inputs.rhine-sdl2.overlays.default
-          inputs.dosh.overlays.default
           inputs.syntax.overlays.default
           (final: prev: with prev.haskell.lib.compose; {
             haskell = prev.haskell // {
@@ -105,6 +112,7 @@
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   greskell = doJailbreak hprev.greskell;
                   greskell-websocket = doJailbreak hprev.greskell-websocket;
+                  inline-rust = dontCheck hprev.inline-rust;
                   json-rpc = hprev.json-rpc_1_1_1;
                   mighttpd2 =
                     let
@@ -198,7 +206,12 @@
           final
           prev;
       packagesFor = pkgs: with pkgs.haskellPackages;
-        let fixPackage = drv: lib.pipe drv [ pkgs.haskell.lib.compose.doHaddock ]; in
+        let
+          fixPackage = drv: lib.pipe drv [
+            pkgs.haskell.lib.compose.doHaddock
+            (drv: drv.overrideAttrs (_: { meta.platforms = lib.platforms.all; }))
+          ];
+        in
         map fixPackage [
           #discord-haskell-voice
           #shakebook
@@ -206,6 +219,7 @@
           QuickCheck
           aeson
           ansi-terminal
+          attoparsec
           brick
           brick-skylighting
           clash-ghc
@@ -244,6 +258,9 @@
           i3ipc
           inline-c
           inline-c-cpp
+          inline-rust
+          jose
+          jose-jwt
           json-rpc
           lens
           lens-family-th
@@ -270,10 +287,12 @@
           openapi3
           optics
           optparse-applicative
+          os-release
           pango
           parser-combinators
           path
           path-io
+          path-text-utf8
           pretty-simple
           prettyprinter
           process-extras

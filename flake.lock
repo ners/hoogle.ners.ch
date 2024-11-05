@@ -2,11 +2,11 @@
   "nodes": {
     "crane": {
       "locked": {
-        "lastModified": 1730060262,
-        "narHash": "sha256-RMgSVkZ9H03sxC+Vh4jxtLTCzSjPq18UWpiM0gq6shQ=",
+        "lastModified": 1730504891,
+        "narHash": "sha256-Fvieht4pai+Wey7terllZAKOj0YsaDP0e88NYs3K/Lo=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "498d9f122c413ee1154e8131ace5a35a80d8fa76",
+        "rev": "8658adcdad49b8f2c6cbf0cc3cb4b4db988f7638",
         "type": "github"
       },
       "original": {
@@ -140,6 +140,27 @@
         "type": "github"
       }
     },
+    "inline-rust": {
+      "inputs": {
+        "language-rust": "language-rust",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1730771752,
+        "narHash": "sha256-5414T7UL9DjFDfssJ/ATdcrBqLB9QhK2CVEDo6OC8Fo=",
+        "owner": "ners",
+        "repo": "inline-rust",
+        "rev": "0fae93f70d2635b4c805a99eadf8314cae2264a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ners",
+        "repo": "inline-rust",
+        "type": "github"
+      }
+    },
     "ioctl": {
       "flake": false,
       "locked": {
@@ -153,6 +174,22 @@
       "original": {
         "owner": "ners",
         "repo": "ioctl",
+        "type": "github"
+      }
+    },
+    "language-rust": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729283594,
+        "narHash": "sha256-nVexe9Jrj0DtpjyPX+S2t/Op2iJyU1IRncW/BO8Ties=",
+        "owner": "GaloisInc",
+        "repo": "language-rust",
+        "rev": "ae59c7355b2fbbe818c1fdd23894df6bfa0432e5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "GaloisInc",
+        "repo": "language-rust",
         "type": "github"
       }
     },
@@ -177,13 +214,29 @@
         "type": "github"
       }
     },
+    "matrix-client": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730509407,
+        "narHash": "sha256-JuaiPYDrTcJGLbbdldA+JPb9YqF4cFPMtFHhsWgi3Mo=",
+        "owner": "ners",
+        "repo": "matrix-client-haskell",
+        "rev": "47b42a4db7ac4e64f14fc95f4036c25f29559016",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ners",
+        "repo": "matrix-client-haskell",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1730200266,
-        "narHash": "sha256-l253w0XMT8nWHGXuXqyiIC/bMvh1VRszGXgdpQlfhvU=",
+        "lastModified": 1730531603,
+        "narHash": "sha256-Dqg6si5CqIzm87sp57j5nTaeBbWhHFaVyG7V6L8k3lY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "807e9154dcb16384b1b765ebe9cd2bba2ac287fd",
+        "rev": "7ffd9ae656aec493492b44d0ddfb28e79a1ea25d",
         "type": "github"
       },
       "original": {
@@ -231,20 +284,21 @@
     },
     "rhine-chat": {
       "inputs": {
-        "crane": "crane",
+        "matrix-client": "matrix-client",
         "nixpkgs": [
           "nixpkgs"
         ],
         "rhine": [
           "rhine"
-        ]
+        ],
+        "vodozemac": "vodozemac"
       },
       "locked": {
-        "lastModified": 1730426153,
-        "narHash": "sha256-zYQAATErYfr1A0jT/FsTZC7+oqUWXBQOSjP/fmqwvPo=",
+        "lastModified": 1730772242,
+        "narHash": "sha256-caNq1/mh0ePJX3FQ7b36BxUWYLYJTDRsHYVv15mC2QQ=",
         "owner": "ners",
         "repo": "rhine-chat",
-        "rev": "c5dfa85aff4eedeb7d7787e4b7a5bdd4cbcf33a8",
+        "rev": "b3d408dc5fe0703e9da77f668f2c672f302df074",
         "type": "github"
       },
       "original": {
@@ -309,6 +363,7 @@
         "fir": "fir",
         "imgui": "imgui",
         "imgui-hs": "imgui-hs",
+        "inline-rust": "inline-rust",
         "nixpkgs": "nixpkgs",
         "opus": "opus",
         "rhine": "rhine",
@@ -364,11 +419,11 @@
         "semi-iso": "semi-iso"
       },
       "locked": {
-        "lastModified": 1729288531,
-        "narHash": "sha256-lTpc1OAG7lW6N9/T7gdDTpuq1Bs6dz0itcCmH24pd90=",
+        "lastModified": 1730561865,
+        "narHash": "sha256-e5RCZmS5Z+nkLSmR9Hj3aNHC/Lhcfbz9IEZBWknpUOQ=",
         "owner": "ners",
         "repo": "syntax",
-        "rev": "ad2e7da23cbbbcef2d09aa582929e2ad14fb1f7f",
+        "rev": "b7b881e185ecb104ce714edd37df53bbea30129c",
         "type": "github"
       },
       "original": {
@@ -419,6 +474,28 @@
       "original": {
         "owner": "ners",
         "repo": "text-rope-zipper",
+        "type": "github"
+      }
+    },
+    "vodozemac": {
+      "inputs": {
+        "crane": "crane",
+        "nixpkgs": [
+          "rhine-chat",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1730591316,
+        "narHash": "sha256-yBFMRvoJQf0A91zTng2N4Z6jgq5RFqoNCmxRr5hAq44=",
+        "owner": "ners",
+        "repo": "vodozemac-haskell",
+        "rev": "8b24b6e56e0984f5eb5ad84ab312cb62cb794809",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ners",
+        "repo": "vodozemac-haskell",
         "type": "github"
       }
     }
