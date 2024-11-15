@@ -148,11 +148,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730771752,
-        "narHash": "sha256-5414T7UL9DjFDfssJ/ATdcrBqLB9QhK2CVEDo6OC8Fo=",
+        "lastModified": 1731848182,
+        "narHash": "sha256-fNAnpPHu9KpLfxONIN1BPiGi+OS0OhJ2F/ANlCR+BQs=",
         "owner": "ners",
         "repo": "inline-rust",
-        "rev": "0fae93f70d2635b4c805a99eadf8314cae2264a3",
+        "rev": "fe45e2fb154a5b68b2e2d1f08b4ea0a168f9373b",
         "type": "github"
       },
       "original": {
@@ -230,13 +230,34 @@
         "type": "github"
       }
     },
+    "monad-schedule": {
+      "inputs": {
+        "nixpkgs": [
+          "rhine",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1731107003,
+        "narHash": "sha256-au6hQM8V4lZtYiwYZl88pAr7xNtFit3pQR0AXvUTuyo=",
+        "owner": "turion",
+        "repo": "monad-schedule",
+        "rev": "f6651c56975bd9e126b9d1d5c8eed0a304d38a30",
+        "type": "github"
+      },
+      "original": {
+        "owner": "turion",
+        "repo": "monad-schedule",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1730531603,
-        "narHash": "sha256-Dqg6si5CqIzm87sp57j5nTaeBbWhHFaVyG7V6L8k3lY=",
+        "lastModified": 1731676054,
+        "narHash": "sha256-OZiZ3m8SCMfh3B6bfGC/Bm4x3qc1m2SVEAlkV6iY7Yg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7ffd9ae656aec493492b44d0ddfb28e79a1ea25d",
+        "rev": "5e4fbfb6b3de1aa2872b76d49fafc942626e2add",
         "type": "github"
       },
       "original": {
@@ -264,16 +285,17 @@
     },
     "rhine": {
       "inputs": {
+        "monad-schedule": "monad-schedule",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1730103800,
-        "narHash": "sha256-k8f/RyGg3aUIkhPMO1JxnyKquDn/Kx1jGDlhAlQHiIU=",
+        "lastModified": 1731697155,
+        "narHash": "sha256-HlVZsYYGbdQZZ719PQjxwXbMjkJOFhcRZpdl7XAgoYE=",
         "owner": "turion",
         "repo": "rhine",
-        "rev": "fcaec156c02842db803113e1242a79065aa527ce",
+        "rev": "2a4f7bec7a5e7ad7a6176f285ccafe204eb9831f",
         "type": "github"
       },
       "original": {
@@ -294,11 +316,11 @@
         "vodozemac": "vodozemac"
       },
       "locked": {
-        "lastModified": 1730772242,
-        "narHash": "sha256-caNq1/mh0ePJX3FQ7b36BxUWYLYJTDRsHYVv15mC2QQ=",
+        "lastModified": 1731657489,
+        "narHash": "sha256-o+8+DP5cXOyKXvdU+tb6N+0A6wfGEsgSqenK4T9v2tw=",
         "owner": "ners",
         "repo": "rhine-chat",
-        "rev": "b3d408dc5fe0703e9da77f668f2c672f302df074",
+        "rev": "add4d33de920339273e7ebc858a9305d359c25aa",
         "type": "github"
       },
       "original": {

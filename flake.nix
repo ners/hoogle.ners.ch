@@ -109,6 +109,7 @@
                   ekg = doJailbreak hprev.ekg;
                   ekg-core = doJailbreak (hfinal.callCabal2nix "ekg-core" inputs.ekg-core { });
                   ekg-json = doJailbreak (hfinal.callCabal2nix "ekg-json" inputs.ekg-json { });
+                  ekg-wai = doJailbreak hprev.ekg-wai;
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   greskell = doJailbreak hprev.greskell;
                   greskell-websocket = doJailbreak hprev.greskell-websocket;
@@ -216,7 +217,9 @@
           #discord-haskell-voice
           #shakebook
           GLFW-b
+          JuicyCairo
           QuickCheck
+          Rasterific
           aeson
           ansi-terminal
           attoparsec
@@ -231,10 +234,13 @@
           dhall-recursive-adt
           dhall-toml
           dhall-yaml
+          diagrams
+          diagrams-cairo
           discord-haskell
           dosh
           either
           ekg
+          ekg-wai
           esqueleto
           extra
           file-embed
@@ -282,6 +288,9 @@
           morpheus-graphql-client
           morpheus-graphql-server
           morpheus-graphql-subscriptions
+          net-mqtt
+          net-mqtt-lens
+          net-mqtt-rpc
           notifications-tray-icon
           opaleye
           openapi3
@@ -296,8 +305,10 @@
           pretty-simple
           prettyprinter
           process-extras
+          qrcode-juicypixels
           random
           random-fu
+          rasterific-svg
           rattle
           rediscaching-haxl
           rhine-dbus
@@ -350,6 +361,7 @@
           vulkan
           vulkan-utils
           wai
+          wai-cli
           wai-extra
           wai-logger
           wai-websockets
