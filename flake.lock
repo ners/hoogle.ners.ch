@@ -1,20 +1,5 @@
 {
   "nodes": {
-    "crane": {
-      "locked": {
-        "lastModified": 1730504891,
-        "narHash": "sha256-Fvieht4pai+Wey7terllZAKOj0YsaDP0e88NYs3K/Lo=",
-        "owner": "ipetkov",
-        "repo": "crane",
-        "rev": "8658adcdad49b8f2c6cbf0cc3cb4b4db988f7638",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ipetkov",
-        "repo": "crane",
-        "type": "github"
-      }
-    },
     "dosh": {
       "inputs": {
         "lsp-client": "lsp-client",
@@ -144,15 +129,16 @@
       "inputs": {
         "language-rust": "language-rust",
         "nixpkgs": [
+          "vodozemac",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1731848182,
-        "narHash": "sha256-fNAnpPHu9KpLfxONIN1BPiGi+OS0OhJ2F/ANlCR+BQs=",
+        "lastModified": 1731893813,
+        "narHash": "sha256-tEDLLodvsd2V+y+8eI+oGTAFfDJ5ewPzSUaJbaoJbWk=",
         "owner": "ners",
         "repo": "inline-rust",
-        "rev": "fe45e2fb154a5b68b2e2d1f08b4ea0a168f9373b",
+        "rev": "bb42cd4f49cfd45b4293280e3f62a7acbc82dbe7",
         "type": "github"
       },
       "original": {
@@ -313,7 +299,9 @@
         "rhine": [
           "rhine"
         ],
-        "vodozemac": "vodozemac"
+        "vodozemac": [
+          "vodozemac"
+        ]
       },
       "locked": {
         "lastModified": 1731657489,
@@ -385,7 +373,6 @@
         "fir": "fir",
         "imgui": "imgui",
         "imgui-hs": "imgui-hs",
-        "inline-rust": "inline-rust",
         "nixpkgs": "nixpkgs",
         "opus": "opus",
         "rhine": "rhine",
@@ -393,7 +380,8 @@
         "rhine-linux": "rhine-linux",
         "rhine-sdl2": "rhine-sdl2",
         "stroll": "stroll",
-        "syntax": "syntax"
+        "syntax": "syntax",
+        "vodozemac": "vodozemac"
       }
     },
     "semi-iso": {
@@ -501,18 +489,17 @@
     },
     "vodozemac": {
       "inputs": {
-        "crane": "crane",
+        "inline-rust": "inline-rust",
         "nixpkgs": [
-          "rhine-chat",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1730591316,
-        "narHash": "sha256-yBFMRvoJQf0A91zTng2N4Z6jgq5RFqoNCmxRr5hAq44=",
+        "lastModified": 1731894780,
+        "narHash": "sha256-uY8bB3Ji5f6gZsSd1FPIfk0D7BLpNTjzjb+ApIMUbG0=",
         "owner": "ners",
         "repo": "vodozemac-haskell",
-        "rev": "8b24b6e56e0984f5eb5ad84ab312cb62cb794809",
+        "rev": "09dca25cfc18c902cd1356e9402d25e91b8be6d4",
         "type": "github"
       },
       "original": {

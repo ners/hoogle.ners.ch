@@ -30,12 +30,6 @@
       url = "git+https://gitlab.com/sheaf/fir.git";
       flake = false;
     };
-    inline-rust = {
-      url = "github:ners/inline-rust";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     stroll = {
       url = "github:snowleopard/stroll";
       flake = false;
@@ -60,6 +54,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         rhine.follows = "rhine";
+        vodozemac.follows = "vodozemac";
       };
     };
     rhine-linux = {
@@ -74,6 +69,12 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         rhine.follows = "rhine";
+      };
+    };
+    vodozemac = {
+      url = "github:ners/vodozemac-haskell";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
       };
     };
   };
@@ -91,11 +92,11 @@
         let inherit (prev) lib; in
         lib.composeManyExtensions [
           inputs.dosh.overlays.default
-          inputs.inline-rust.overlays.default
           inputs.rhine-chat.overlays.default
           inputs.rhine-linux.overlays.default
           inputs.rhine-sdl2.overlays.default
           inputs.syntax.overlays.default
+          inputs.vodozemac.overlays.default
           (final: prev: with prev.haskell.lib.compose; {
             haskell = prev.haskell // {
               packageOverrides = lib.composeManyExtensions [
@@ -113,7 +114,6 @@
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   greskell = doJailbreak hprev.greskell;
                   greskell-websocket = doJailbreak hprev.greskell-websocket;
-                  inline-rust = dontCheck hprev.inline-rust;
                   json-rpc = hprev.json-rpc_1_1_1;
                   mighttpd2 =
                     let
@@ -127,7 +127,7 @@
                           network-run = hprev.network-run_0_4_0;
                           quic = unmarkBroken hprev.quic;
                           time-manager = hprev.time-manager_0_1_0;
-                          tls = hprev.tls_2_1_0;
+                          tls = hprev.tls_2_1_1;
                           tls-session-manager = hprev.tls-session-manager_0_0_6;
                           wai-app-file-cgi = dontCheck (unmarkBroken hprev.wai-app-file-cgi);
                           warp = dontCheck (hprev.callHackageDirect
@@ -264,7 +264,6 @@
           i3ipc
           inline-c
           inline-c-cpp
-          inline-rust
           jose
           jose-jwt
           json-rpc
@@ -360,6 +359,7 @@
           vty
           vulkan
           vulkan-utils
+          vodozemac
           wai
           wai-cli
           wai-extra
