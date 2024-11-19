@@ -218,6 +218,7 @@
           #shakebook
           GLFW-b
           JuicyCairo
+          JuicyPixels-extra
           QuickCheck
           Rasterific
           aeson
@@ -227,6 +228,7 @@
           brick-skylighting
           clash-ghc
           clash-shake
+          crem
           data-default
           data-fix
           dhall
@@ -235,16 +237,22 @@
           dhall-toml
           dhall-yaml
           diagrams
+          diagrams
           diagrams-cairo
+          diagrams-gtk
+          diagrams-pandoc
           discord-haskell
           dosh
           either
           ekg
+          ekg-prometheus-adapter
+          ekg-statsd
           ekg-wai
           esqueleto
           extra
           file-embed
           fir
+          freetype2
           generic-arbitrary
           generic-lens
           generic-lens-lite
@@ -269,6 +277,7 @@
           json-rpc
           lens
           lens-family-th
+          lens-regex
           lens-time
           lifted-base
           lrucaching-haxl
@@ -282,6 +291,7 @@
           monad-control
           monad-logger
           monad-logger-aeson
+          monad-logger-extras
           monad-metrics
           morpheus-graphql
           morpheus-graphql-client
@@ -291,16 +301,24 @@
           net-mqtt-lens
           net-mqtt-rpc
           notifications-tray-icon
+          numhask
+          numhask-space
           opaleye
           openapi3
           optics
           optparse-applicative
+          optparse-generic
+          optparse-simple
+          optparse-th
           os-release
           pango
           parser-combinators
           path
           path-io
           path-text-utf8
+          perf
+          plot
+          plots
           pretty-simple
           prettyprinter
           process-extras
@@ -310,6 +328,7 @@
           rasterific-svg
           rattle
           rediscaching-haxl
+          replace-attoparsec
           rhine-dbus
           rhine-i3
           rhine-inotify
@@ -339,13 +358,16 @@
           shake-path
           shake-persist
           shelly
+          simple-cairo
           skylighting
           slick
           stm-containers
           stroll
+          svgcairo
           syntax
           syntax-attoparsec
           syntax-printer
+          systemd
           telegram-bot-simple
           text-rope-zipper
           these
@@ -356,16 +378,17 @@
           vec
           vec-lens
           vector
+          vodozemac
           vty
           vulkan
           vulkan-utils
-          vodozemac
           wai
           wai-cli
           wai-extra
           wai-logger
           wai-websockets
           warp
+          warp-systemd
           websockets
         ];
       nixosModule = { pkgs, ... }:
