@@ -316,7 +316,7 @@
           path
           path-io
           path-text-utf8
-          perf
+          perf_0_13_0_0
           plot
           plots
           pretty-simple
