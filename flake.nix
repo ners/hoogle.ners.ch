@@ -252,7 +252,6 @@
           extra
           file-embed
           fir
-          freetype2
           generic-arbitrary
           generic-lens
           generic-lens-lite
