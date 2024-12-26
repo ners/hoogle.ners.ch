@@ -114,6 +114,20 @@
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   greskell = doJailbreak hprev.greskell;
                   greskell-websocket = doJailbreak hprev.greskell-websocket;
+                  heftia = hprev.callHackageDirect
+                    {
+                      pkg = "heftia";
+                      ver = "0.5.0.0";
+                      sha256 = "sha256-yD3yeBqElbA1UjBu0iM4Wxdl4AXw4A6+8NbokA/zEds=";
+                    }
+                    { };
+                  heftia-effects = hprev.callHackageDirect
+                    {
+                      pkg = "heftia-effects";
+                      ver = "0.5.0.0";
+                      sha256 = "sha256-6j6q/prpGULXUNE6PQxxMkxC/YtbvuCZUx+RQ53REqg=";
+                    }
+                    { };
                   json-rpc = hprev.json-rpc_1_1_1;
                   mighttpd2 =
                     let
@@ -214,8 +228,12 @@
           ];
         in
         map fixPackage [
+          #co-log-effectful
           #discord-haskell-voice
+          #effectful-log
+          #heftia-effects
           #shakebook
+          #wreq-effectful
           GLFW-b
           JuicyCairo
           JuicyPixels-extra
@@ -243,6 +261,7 @@
           diagrams-pandoc
           discord-haskell
           dosh
+          effectful
           either
           ekg
           ekg-prometheus-adapter
@@ -263,6 +282,7 @@
           greskell
           greskell-websocket
           hashable
+          haskell-modbus
           hinotify
           hnix
           hspec
@@ -274,10 +294,12 @@
           jose
           jose-jwt
           json-rpc
+          ki-effectful
           lens
           lens-family-th
           lens-regex
           lens-time
+          libmodbus
           lifted-base
           lrucaching-haxl
           lsp-client
@@ -292,6 +314,7 @@
           monad-logger-aeson
           monad-logger-extras
           monad-metrics
+          monad-time-effectful
           morpheus-graphql
           morpheus-graphql-client
           morpheus-graphql-server
@@ -328,6 +351,7 @@
           rattle
           rediscaching-haxl
           replace-attoparsec
+          retry-effectful
           rhine-dbus
           rhine-i3
           rhine-inotify
@@ -371,6 +395,7 @@
           text-rope-zipper
           these
           turtle
+          typed-process-effectful
           unliftio
           unordered-containers
           uuid
