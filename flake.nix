@@ -71,6 +71,18 @@
         rhine.follows = "rhine";
       };
     };
+    co-log-effectful = {
+      url = "github:eldritch-cookie/co-log-effectful";
+      flake = false;
+    };
+    servant-effectful = {
+      url = "github:Kleidukos/servant-effectful";
+      flake = false;
+    };
+    wreq-effectful = {
+      url = "github:The1Penguin/wreq-effectful";
+      flake = false;
+    };
     vodozemac = {
       url = "github:ners/vodozemac-haskell";
       inputs = {
@@ -128,6 +140,7 @@
                       sha256 = "sha256-6j6q/prpGULXUNE6PQxxMkxC/YtbvuCZUx+RQ53REqg=";
                     }
                     { };
+                  hyperbole = doJailbreak hprev.hyperbole;
                   json-rpc = hprev.json-rpc_1_1_1;
                   mighttpd2 =
                     let
@@ -183,6 +196,9 @@
                     '';
                   });
                   opus = addPkgconfigDepend prev.libopus (hfinal.callCabal2nix "opus" inputs.opus { });
+                  co-log-effectful = hfinal.callCabal2nix "co-log-effectful" inputs.co-log-effectful { };
+                  servant-effectful = dontCheck (hfinal.callCabal2nix "servant-effectful" inputs.servant-effectful { });
+                  wreq-effectful = hfinal.callCabal2nix "wreq-effectful" inputs.wreq-effectful { };
                   servant-serialization = dontCheck (doJailbreak hprev.servant-serialization);
                   stroll = doJailbreak (hfinal.callCabal2nix "stroll" inputs.stroll { });
                   sdl2-mixer = lib.pipe hprev.sdl2-mixer [
@@ -228,12 +244,9 @@
           ];
         in
         map fixPackage [
-          #co-log-effectful
           #discord-haskell-voice
-          #effectful-log
           #heftia-effects
           #shakebook
-          #wreq-effectful
           GLFW-b
           JuicyCairo
           JuicyPixels-extra
@@ -246,6 +259,9 @@
           brick-skylighting
           clash-ghc
           clash-shake
+          co-log
+          co-log-json
+          co-log-effectful
           crem
           data-default
           data-fix
@@ -288,6 +304,7 @@
           hspec
           http-media
           http-types
+          hyperbole
           i3ipc
           inline-c
           inline-c-cpp
@@ -301,6 +318,7 @@
           lens-time
           libmodbus
           lifted-base
+          log-effectful
           lrucaching-haxl
           lsp-client
           lsp-test
@@ -315,6 +333,8 @@
           monad-logger-extras
           monad-metrics
           monad-time-effectful
+          monomer
+          monomer-hagrid
           morpheus-graphql
           morpheus-graphql-client
           morpheus-graphql-server
@@ -365,6 +385,7 @@
           sdl2-ttf
           servant-blaze
           servant-client
+          servant-effectful
           servant-multipart-client
           servant-openapi3
           servant-quickcheck
@@ -414,6 +435,7 @@
           warp
           warp-systemd
           websockets
+          wreq-effectful
         ];
       nixosModule = { pkgs, ... }:
         let pkgs' = pkgs.extend overlay; in
