@@ -260,8 +260,8 @@
           clash-ghc
           clash-shake
           co-log
-          co-log-json
           co-log-effectful
+          co-log-json
           crem
           data-default
           data-fix
@@ -302,6 +302,7 @@
           hinotify
           hnix
           hspec
+          hspec-webdriver
           http-media
           http-types
           hyperbole
@@ -365,6 +366,7 @@
           prettyprinter
           process-extras
           qrcode-juicypixels
+          quickcheck-webdriver
           random
           random-fu
           rasterific-svg
