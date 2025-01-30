@@ -9,7 +9,7 @@ fi
 
 nix flake update
 
-nom build
+nom build --keep-going
 
 if [ -e result-prev ]; then
     nvd diff result-prev result

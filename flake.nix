@@ -30,6 +30,10 @@
       url = "git+https://gitlab.com/sheaf/fir.git";
       flake = false;
     };
+    kubernetes-client = {
+      url = "github:kubernetes-client/haskell";
+      flake = false;
+    };
     stroll = {
       url = "github:snowleopard/stroll";
       flake = false;
@@ -100,8 +104,27 @@
         else if isAttrs xs then mapAttrsToList f xs
         else throw "foreach: expected list or attrset but got ${typeOf xs}"
       );
+      unbreak-all = prev: hfinal: with lib; with prev.haskell.lib.compose; mapAttrs (name: v: pipe v (concatLists [
+        (optionals (isDerivation v && v.override.__functionArgs == { }) (concatLists [
+          (optionals v.meta.broken [
+            (trace "unbreaking ${v.name}")
+            doJailbreak
+            dontCheck
+            unmarkBroken
+          ])
+        ]))
+      ]));
       overlay = final: prev:
-        let inherit (prev) lib; in
+        let
+          inherit (prev) lib;
+          resolveLinks = input: prev.runCommandNoCC "source" { } /*bash*/ ''
+            cd ${input}
+            find . -not -type d | while read f; do
+              mkdir -p $out/$(dirname $f)
+              ln -s $(realpath $f) $out/$f
+            done
+          '';
+        in
         lib.composeManyExtensions [
           inputs.dosh.overlays.default
           inputs.rhine-chat.overlays.default
@@ -126,44 +149,63 @@
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   greskell = doJailbreak hprev.greskell;
                   greskell-websocket = doJailbreak hprev.greskell-websocket;
-                  heftia = hprev.callHackageDirect
-                    {
-                      pkg = "heftia";
-                      ver = "0.5.0.0";
-                      sha256 = "sha256-yD3yeBqElbA1UjBu0iM4Wxdl4AXw4A6+8NbokA/zEds=";
-                    }
-                    { };
-                  heftia-effects = hprev.callHackageDirect
-                    {
-                      pkg = "heftia-effects";
-                      ver = "0.5.0.0";
-                      sha256 = "sha256-6j6q/prpGULXUNE6PQxxMkxC/YtbvuCZUx+RQ53REqg=";
-                    }
-                    { };
-                  hyperbole = doJailbreak hprev.hyperbole;
+                  heftia = hprev.callHackage "heftia" "0.5.0.0" { };
+                  heftia-effects = hprev.callHackage "heftia-effects" "0.5.0.0" { };
+                  hyperbole =
+                    let
+                      hp = prev.haskell.packages.ghc98.override {
+                        overrides = lib.composeManyExtensions [
+                          (hfinal: hprev: {
+                            Diff = hprev.Diff_1_0_2;
+                            aeson = doJailbreak hprev.aeson_2_2_3_0;
+                            attoparsec-aeson = hprev.attoparsec-aeson_2_2_2_0;
+                            data-default = hprev.data-default_0_8_0_0;
+                            effectful = hprev.effectful_2_5_1_0;
+                            effectful-core = hprev.effectful-core_2_5_1_0;
+                            http-api-data = doJailbreak (prev.haskell.packages.ghc98.override {overrides = _: _: {
+                              http-types = hprev.http-types;
+                              uuid-types = hprev.uuid-types_1_0_6;
+                            };}).http-api-data_0_6_1;
+                            web-view = dontCheck (doJailbreak (hprev.callHackageDirect
+                              {
+                                pkg = "web-view";
+                                ver = "0.7.0";
+                                sha256 = "sha256-50bJvoffv/ZPR98qNgqO+aFfziBAZW4mh66IoCsFBgo=";
+                              }
+                              { }));
+                          })
+                          (unbreak-all prev)
+                        ];
+                      };
+                    in
+                    dontCheck (hp.callHackageDirect
+                      {
+                        pkg = "hyperbole";
+                        ver = "0.4.2";
+                        sha256 = "sha256-ePgn94qv6JiPNEyBeJbR0LxpGY1iBJB94fxCqEBnOlw=";
+                      }
+                      { });
                   json-rpc = hprev.json-rpc_1_1_1;
+                  kubernetes-client = hfinal.callCabal2nix "kubernetes-client" "${resolveLinks inputs.kubernetes-client}/kubernetes-client" { };
+                  kubernetes-client-core = hfinal.callCabal2nix "kubernetes-client-core" "${resolveLinks inputs.kubernetes-client}/kubernetes-1.30" { };
                   mighttpd2 =
                     let
                       hp = prev.haskellPackages.override {
                         overrides = _: hprev: {
-                          auto-update = hprev.auto-update_0_2_1;
-                          crypton-connection = hprev.crypton-connection_0_4_1;
-                          http2 = hprev.http2_5_3_4;
+                          auto-update = hprev.auto-update_0_2_6;
+                          crypton-connection = hprev.crypton-connection_0_4_3;
+                          http-semantics = hprev.http-semantics_0_3_0;
+                          http2 = hprev.http2_5_3_9;
                           http3 = dontCheck hprev.http3;
+                          network = hprev.network_3_2_7_0;
                           network-control = hprev.network-control_0_1_3;
                           network-run = hprev.network-run_0_4_0;
                           quic = unmarkBroken hprev.quic;
-                          time-manager = hprev.time-manager_0_1_0;
-                          tls = hprev.tls_2_1_1;
-                          tls-session-manager = hprev.tls-session-manager_0_0_6;
+                          time-manager = hprev.time-manager_0_2_2;
+                          tls = hprev.tls_2_1_5;
+                          tls-session-manager = hprev.tls-session-manager_0_0_7;
                           wai-app-file-cgi = dontCheck (unmarkBroken hprev.wai-app-file-cgi);
-                          warp = dontCheck (hprev.callHackageDirect
-                            {
-                              pkg = "warp";
-                              ver = "3.4.3";
-                              sha256 = "sha256-XkDd5X2zjOwrQ0Mjv/frk49NC//g4IsTUMrJVkSY9qE=";
-                            }
-                            { });
+                          warp = dontCheck (hprev.callHackage "warp" "3.4.7" { });
                         };
                       };
                     in
@@ -220,16 +262,7 @@
                     ++ attrs.nativeBuildInputs or [ ];
                   });
                 })
-                (hfinal: with lib; mapAttrs (name: v: pipe v (concatLists [
-                  (optionals (isDerivation v && v.override.__functionArgs == { }) (concatLists [
-                    (optionals v.meta.broken [
-                      (trace "unbreaking ${v.name}")
-                      doJailbreak
-                      dontCheck
-                      unmarkBroken
-                    ])
-                  ]))
-                ])))
+                (unbreak-all prev)
               ];
             };
           })
@@ -246,7 +279,6 @@
         map fixPackage [
           #discord-haskell-voice
           #heftia-effects
-          #shakebook
           GLFW-b
           JuicyCairo
           JuicyPixels-extra
@@ -313,6 +345,7 @@
           jose-jwt
           json-rpc
           ki-effectful
+          kubernetes-client
           lens
           lens-family-th
           lens-regex
@@ -359,7 +392,7 @@
           path
           path-io
           path-text-utf8
-          perf_0_13_0_0
+          perf
           plot
           plots
           pretty-simple
@@ -403,6 +436,7 @@
           shake-literate
           shake-path
           shake-persist
+          shake-plus
           shelly
           simple-cairo
           skylighting
