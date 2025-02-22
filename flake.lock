@@ -3,11 +3,11 @@
     "co-log-effectful": {
       "flake": false,
       "locked": {
-        "lastModified": 1731763859,
-        "narHash": "sha256-2l7MYQ4Jj7ETbdB3phQ1pr4PkDgqerctL1LHoWOf8mc=",
+        "lastModified": 1738358259,
+        "narHash": "sha256-V+JiNh+GY4OC+uEp4AeX6wYMzsj5JJAqnrraXn1T8kg=",
         "owner": "eldritch-cookie",
         "repo": "co-log-effectful",
-        "rev": "1af4f8d91dbc1a4ddd6b0b84f742278c421207a5",
+        "rev": "be451264f0637804368fba1751ed7bc8606eefc6",
         "type": "github"
       },
       "original": {
@@ -89,6 +89,23 @@
       "original": {
         "type": "git",
         "url": "https://gitlab.com/sheaf/fir.git"
+      }
+    },
+    "fraxl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714344453,
+        "narHash": "sha256-Yw3ZiYnffCwtY5zzJyXT2BspN+Gre3hpkeN3XcM8xIU=",
+        "owner": "russellmcc",
+        "repo": "fraxl",
+        "rev": "d56f76df5a9681693e1bc4bb4c848b571a2f44ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "russellmcc",
+        "ref": "bump-dependency-versions",
+        "repo": "fraxl",
+        "type": "github"
       }
     },
     "haskell-terminal": {
@@ -271,11 +288,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1738142207,
-        "narHash": "sha256-NGqpVVxNAHwIicXpgaVqJEJWeyqzoQJ9oc8lnK9+WC4=",
+        "lastModified": 1739866667,
+        "narHash": "sha256-EO1ygNKZlsAC9avfcwHkKGMsmipUk1Uc0TbrEZpkn64=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "9d3ae807ebd2981d593cddd0080856873139aa40",
+        "rev": "73cf49b8ad837ade2de76f87eb53fc85ed5d4680",
         "type": "github"
       },
       "original": {
@@ -288,11 +305,11 @@
     "opus": {
       "flake": false,
       "locked": {
-        "lastModified": 1653881709,
-        "narHash": "sha256-5VmoyOZmecmTtEA+hk8Q3qqfr9I8Q1zA7nGlkyiiN/s=",
+        "lastModified": 1739579144,
+        "narHash": "sha256-p/oOIiYhnblwF5pqsnvT7mewcofLDgyjMx4TJw8LtvA=",
         "owner": "yutotakano",
         "repo": "opus",
-        "rev": "8ba5739821af9c27cf9d50f03b72b58ed88b913a",
+        "rev": "33c0f92287cce0df1e1ad1458145056b228ac9e6",
         "type": "github"
       },
       "original": {
@@ -309,11 +326,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736371772,
-        "narHash": "sha256-osr/gR0IVueAPm0jERS9MclqB6xU+x35L98a/rHWozU=",
+        "lastModified": 1739036838,
+        "narHash": "sha256-t+WWUCTwItN75QaOe6R8mv/8BCtmllYJDFXsrY7K7MA=",
         "owner": "turion",
         "repo": "rhine",
-        "rev": "93b5619c227a6260a5c5126782322f70f93d138e",
+        "rev": "d39f713a55c0adf8f26728c4b2359e359e563d83",
         "type": "github"
       },
       "original": {
@@ -404,6 +421,7 @@
         "ekg-core": "ekg-core",
         "ekg-json": "ekg-json",
         "fir": "fir",
+        "fraxl": "fraxl",
         "imgui": "imgui",
         "imgui-hs": "imgui-hs",
         "kubernetes-client": "kubernetes-client",
@@ -417,6 +435,7 @@
         "stroll": "stroll",
         "syntax": "syntax",
         "vodozemac": "vodozemac",
+        "wai-middleware-auth": "wai-middleware-auth",
         "wreq-effectful": "wreq-effectful"
       }
     },
@@ -444,15 +463,15 @@
     "servant-effectful": {
       "flake": false,
       "locked": {
-        "lastModified": 1733867250,
-        "narHash": "sha256-M0O9nSrUY523ysjQcIzmLbAmNJeNnSWgthBKHfH+KR8=",
-        "owner": "Kleidukos",
+        "lastModified": 1716980599,
+        "narHash": "sha256-3mgvO6CJoPqmkLo4qYEWsJG30+FFXumIAjMUyQqfyhQ=",
+        "owner": "Diamondy4",
         "repo": "servant-effectful",
-        "rev": "22af09642078d5296b524495ad8213bf2ace62d2",
+        "rev": "e4b1e1e80cbeee939dae78175b5883bb79497908",
         "type": "github"
       },
       "original": {
-        "owner": "Kleidukos",
+        "owner": "Diamondy4",
         "repo": "servant-effectful",
         "type": "github"
       }
@@ -557,6 +576,22 @@
       "original": {
         "owner": "ners",
         "repo": "vodozemac-haskell",
+        "type": "github"
+      }
+    },
+    "wai-middleware-auth": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723488966,
+        "narHash": "sha256-LRwynvAkwXrhdvlXkxKUDXt3BJNbHdPCpu47IUL5z2g=",
+        "owner": "NoRedInk",
+        "repo": "wai-middleware-auth",
+        "rev": "f317030d8c7e66d2df6f170a3d30ffdf49f45890",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NoRedInk",
+        "repo": "wai-middleware-auth",
         "type": "github"
       }
     },

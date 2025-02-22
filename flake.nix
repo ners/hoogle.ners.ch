@@ -30,6 +30,10 @@
       url = "git+https://gitlab.com/sheaf/fir.git";
       flake = false;
     };
+    fraxl = {
+      url = "github:russellmcc/fraxl/bump-dependency-versions";
+      flake = false;
+    };
     kubernetes-client = {
       url = "github:kubernetes-client/haskell";
       flake = false;
@@ -80,7 +84,11 @@
       flake = false;
     };
     servant-effectful = {
-      url = "github:Kleidukos/servant-effectful";
+      url = "github:Diamondy4/servant-effectful";
+      flake = false;
+    };
+    wai-middleware-auth = {
+      url = "github:NoRedInk/wai-middleware-auth";
       flake = false;
     };
     wreq-effectful = {
@@ -147,8 +155,15 @@
                   ekg-json = doJailbreak (hfinal.callCabal2nix "ekg-json" inputs.ekg-json { });
                   ekg-wai = doJailbreak hprev.ekg-wai;
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
+                  fraxl = doJailbreak (hfinal.callCabal2nix "fraxl" inputs.fraxl { });
                   greskell = doJailbreak hprev.greskell;
                   greskell-websocket = doJailbreak hprev.greskell-websocket;
+                  gtk = appendPatch
+                    (prev.fetchpatch {
+                      url = "https://github.com/gtk2hs/gtk2hs/commit/ca7f98bd3e9462deac3661244dc76004a36fc8c3.patch";
+                      hash = "sha256-FaIohq7pEA4OnX/b6hBwsF5wcRO3uBtE2IsabJDGKT4=";
+                    })
+                    hprev.gtk;
                   heftia = hprev.callHackage "heftia" "0.5.0.0" { };
                   heftia-effects = hprev.callHackage "heftia-effects" "0.5.0.0" { };
                   hyperbole =
@@ -162,10 +177,12 @@
                             data-default = hprev.data-default_0_8_0_0;
                             effectful = hprev.effectful_2_5_1_0;
                             effectful-core = hprev.effectful-core_2_5_1_0;
-                            http-api-data = doJailbreak (prev.haskell.packages.ghc98.override {overrides = _: _: {
-                              http-types = hprev.http-types;
-                              uuid-types = hprev.uuid-types_1_0_6;
-                            };}).http-api-data_0_6_1;
+                            http-api-data = doJailbreak (prev.haskell.packages.ghc98.override {
+                              overrides = _: _: {
+                                http-types = hprev.http-types;
+                                uuid-types = hprev.uuid-types_1_0_6;
+                              };
+                            }).http-api-data_0_6_1;
                             web-view = dontCheck (doJailbreak (hprev.callHackageDirect
                               {
                                 pkg = "web-view";
@@ -240,6 +257,14 @@
                   opus = addPkgconfigDepend prev.libopus (hfinal.callCabal2nix "opus" inputs.opus { });
                   co-log-effectful = hfinal.callCabal2nix "co-log-effectful" inputs.co-log-effectful { };
                   servant-effectful = dontCheck (hfinal.callCabal2nix "servant-effectful" inputs.servant-effectful { });
+                  wai-middleware-auth = dontCheck (hfinal.callCabal2nix "wai-middleware-auth" inputs.wai-middleware-auth { });
+                  hoauth2 = doJailbreak (hprev.callHackage "hoauth2" "2.1.0" {});
+                  servant-oauth2 = hprev.servant-oauth2.overrideAttrs (attrs: {
+                    postPatch = ''
+                      ${attrs.postPatch or ""}
+                      sed -i 's/, OA2.oauth2RedirectUri = callbackURI/, OA2.oauth2RedirectUri = Just callbackURI/' src/Servant/OAuth2/Hacks.hs
+                    '';
+                  });
                   wreq-effectful = hfinal.callCabal2nix "wreq-effectful" inputs.wreq-effectful { };
                   servant-serialization = dontCheck (doJailbreak hprev.servant-serialization);
                   stroll = doJailbreak (hfinal.callCabal2nix "stroll" inputs.stroll { });
@@ -295,6 +320,7 @@
           co-log-effectful
           co-log-json
           crem
+          criterion
           data-default
           data-fix
           dhall
@@ -303,10 +329,9 @@
           dhall-toml
           dhall-yaml
           diagrams
-          diagrams
           diagrams-cairo
-          diagrams-gtk
           diagrams-pandoc
+          diagrams-svg
           discord-haskell
           dosh
           effectful
@@ -319,11 +344,13 @@
           extra
           file-embed
           fir
+          fraxl
           generic-arbitrary
           generic-lens
           generic-lens-lite
           generic-optics
           generic-optics-lite
+          gerrit
           ghc-syntax-highlighter
           github
           github-rest
@@ -333,6 +360,7 @@
           haskell-modbus
           hinotify
           hnix
+          hoauth2
           hspec
           hspec-webdriver
           http-media
@@ -422,6 +450,7 @@
           servant-client
           servant-effectful
           servant-multipart-client
+          servant-oauth2
           servant-openapi3
           servant-quickcheck
           servant-serialization
@@ -437,6 +466,7 @@
           shake-path
           shake-persist
           shake-plus
+          shakespeare
           shelly
           simple-cairo
           skylighting
@@ -467,9 +497,11 @@
           wai-cli
           wai-extra
           wai-logger
+          wai-middleware-auth
           wai-websockets
           warp
           warp-systemd
+          waterfall-cad
           websockets
           wreq-effectful
         ];
