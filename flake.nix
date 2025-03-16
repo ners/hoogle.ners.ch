@@ -479,6 +479,7 @@
           syntax-attoparsec
           syntax-printer
           systemd
+          tasty-hspec
           telegram-bot-simple
           text-rope-zipper
           these
