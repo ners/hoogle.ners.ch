@@ -389,6 +389,7 @@
           microlens
           microlens-th
           mighttpd2
+          miso
           monad-control
           monad-logger
           monad-logger-aeson
