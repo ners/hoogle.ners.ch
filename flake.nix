@@ -18,14 +18,6 @@
       url = "github:haskell-game/dear-imgui.hs";
       flake = false;
     };
-    ekg-core = {
-      url = "github:tibbe/ekg-core";
-      flake = false;
-    };
-    ekg-json = {
-      url = "github:vshabanov/ekg-json/aeson-2.0";
-      flake = false;
-    };
     fir = {
       url = "git+https://gitlab.com/sheaf/fir.git";
       flake = false;
@@ -47,7 +39,7 @@
       flake = false;
     };
     syntax = {
-      url = "github:ners/syntax";
+      url = "github:ners/syntax/bytes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dosh = {
@@ -150,9 +142,6 @@
                   dhall-json = doJailbreak hprev.dhall-json;
                   dhall-yaml = doJailbreak hprev.dhall-yaml;
                   discord-haskell-voice = addBuildDepend hfinal.opus hprev.discord-haskell-voice;
-                  ekg = doJailbreak hprev.ekg;
-                  ekg-core = doJailbreak (hfinal.callCabal2nix "ekg-core" inputs.ekg-core { });
-                  ekg-json = doJailbreak (hfinal.callCabal2nix "ekg-json" inputs.ekg-json { });
                   ekg-wai = doJailbreak hprev.ekg-wai;
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   fraxl = doJailbreak (hfinal.callCabal2nix "fraxl" inputs.fraxl { });
@@ -255,6 +244,10 @@
                     '';
                   });
                   opus = addPkgconfigDepend prev.libopus (hfinal.callCabal2nix "opus" inputs.opus { });
+                  perf = dontCheck (doJailbreak hprev.perf_0_14_0_1);
+                  chart-svg = hprev.chart-svg_0_8_0_0;
+                  numhask = hprev.numhask_0_12_1_0;
+                  numhask-space = hprev.numhask-space_0_12_0_0;
                   co-log-effectful = hfinal.callCabal2nix "co-log-effectful" inputs.co-log-effectful { };
                   servant-effectful = dontCheck (hfinal.callCabal2nix "servant-effectful" inputs.servant-effectful { });
                   wai-middleware-auth = dontCheck (hfinal.callCabal2nix "wai-middleware-auth" inputs.wai-middleware-auth { });
@@ -312,6 +305,7 @@
           aeson
           ansi-terminal
           attoparsec
+          blaze-htmx
           brick
           brick-skylighting
           clash-ghc
@@ -363,6 +357,7 @@
           hoauth2
           hspec
           hspec-webdriver
+          htmx-servant
           http-media
           http-types
           hyperbole
@@ -479,6 +474,7 @@
           syntax-attoparsec
           syntax-printer
           systemd
+          tasty-bench
           tasty-hspec
           telegram-bot-simple
           text-rope-zipper

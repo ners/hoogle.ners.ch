@@ -42,39 +42,6 @@
         "type": "github"
       }
     },
-    "ekg-core": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1741630843,
-        "narHash": "sha256-nBzOMqmp1j22Xfnv/+R76+iRDQaUIcyuF5X+ZtInX4c=",
-        "owner": "tibbe",
-        "repo": "ekg-core",
-        "rev": "e78637115b654a071948803c5f863a27d1e6d651",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tibbe",
-        "repo": "ekg-core",
-        "type": "github"
-      }
-    },
-    "ekg-json": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1678135967,
-        "narHash": "sha256-N3so4S57XFSaKyJnOTJ3GHTygs3qJZr24g52H4C7VMk=",
-        "owner": "vshabanov",
-        "repo": "ekg-json",
-        "rev": "0ee252f50aca67084a046a2cbf3a3a6badef833e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vshabanov",
-        "ref": "aeson-2.0",
-        "repo": "ekg-json",
-        "type": "github"
-      }
-    },
     "fir": {
       "flake": false,
       "locked": {
@@ -419,8 +386,6 @@
       "inputs": {
         "co-log-effectful": "co-log-effectful",
         "dosh": "dosh",
-        "ekg-core": "ekg-core",
-        "ekg-json": "ekg-json",
         "fir": "fir",
         "fraxl": "fraxl",
         "imgui": "imgui",
@@ -448,11 +413,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729288420,
-        "narHash": "sha256-UHZ734arb3pbD3kfUghPrvCBvlgJ+LlH1NHSPP3KNgI=",
+        "lastModified": 1729358745,
+        "narHash": "sha256-ajXX+DhENGu7j34wnNb4bFCzbq9NkAj7NnDvKiQseLw=",
         "owner": "ners",
         "repo": "semi-iso",
-        "rev": "07ba77fa32596c7786d223830b52eb5be05d43d6",
+        "rev": "f679110925cac46c0205880081822972236543ab",
         "type": "github"
       },
       "original": {
@@ -501,15 +466,16 @@
         "semi-iso": "semi-iso"
       },
       "locked": {
-        "lastModified": 1730561865,
-        "narHash": "sha256-e5RCZmS5Z+nkLSmR9Hj3aNHC/Lhcfbz9IEZBWknpUOQ=",
+        "lastModified": 1741645381,
+        "narHash": "sha256-0+ydUvhkG8dlF43NBAalsPZvn7Vx6cBW+TRIUsT8kw4=",
         "owner": "ners",
         "repo": "syntax",
-        "rev": "b7b881e185ecb104ce714edd37df53bbea30129c",
+        "rev": "dd6380654b8a6e5615bd661ea60b9a626eb0fe35",
         "type": "github"
       },
       "original": {
         "owner": "ners",
+        "ref": "bytes",
         "repo": "syntax",
         "type": "github"
       }
