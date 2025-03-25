@@ -206,7 +206,7 @@
                           network = hprev.network_3_2_7_0;
                           network-control = hprev.network-control_0_1_3;
                           network-run = hprev.network-run_0_4_0;
-                          quic = unmarkBroken hprev.quic;
+                          quic = dontCheck (unmarkBroken hprev.quic);
                           time-manager = hprev.time-manager_0_2_2;
                           tls = hprev.tls_2_1_5;
                           tls-session-manager = hprev.tls-session-manager_0_0_7;
@@ -326,6 +326,8 @@
           diagrams-cairo
           diagrams-pandoc
           diagrams-svg
+          dimensional
+          dimensional-codata
           discord-haskell
           dosh
           effectful
@@ -364,6 +366,8 @@
           i3ipc
           inline-c
           inline-c-cpp
+          io-classes
+          io-sim
           jose
           jose-jwt
           json-rpc
@@ -439,6 +443,7 @@
           rhine-udev
           rhine-v4l2
           rio
+          science-constants-dimensional
           sdl2-image
           sdl2-mixer
           sdl2-ttf
@@ -481,6 +486,7 @@
           these
           turtle
           typed-process-effectful
+          units
           unliftio
           unordered-containers
           uuid
