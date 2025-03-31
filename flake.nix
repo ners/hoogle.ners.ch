@@ -260,6 +260,7 @@
                   });
                   wreq-effectful = hfinal.callCabal2nix "wreq-effectful" inputs.wreq-effectful { };
                   servant-serialization = dontCheck (doJailbreak hprev.servant-serialization);
+                  servant-rate-limit = dontCheck hprev.servant-rate-limit;
                   stroll = doJailbreak (hfinal.callCabal2nix "stroll" inputs.stroll { });
                   sdl2-mixer = lib.pipe hprev.sdl2-mixer [
                     (drv: drv.overrideAttrs (attrs: {
@@ -297,6 +298,7 @@
         map fixPackage [
           #discord-haskell-voice
           #heftia-effects
+          #websockets-rpc
           GLFW-b
           JuicyCairo
           JuicyPixels-extra
@@ -450,12 +452,15 @@
           servant-blaze
           servant-client
           servant-effectful
+          servant-jsonrpc
           servant-multipart-client
           servant-oauth2
           servant-openapi3
           servant-quickcheck
+          servant-rate-limit
           servant-serialization
           servant-server
+          servant-websockets
           shake
           shake-bench
           shake-c
@@ -502,11 +507,12 @@
           wai-extra
           wai-logger
           wai-middleware-auth
-          wai-websockets
+          wai-transformers
           warp
           warp-systemd
           waterfall-cad
-          websockets
+          websockets-json
+          websockets-simple
           wreq-effectful
         ];
       nixosModule = { pkgs, ... }:
