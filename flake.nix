@@ -157,21 +157,20 @@
                   heftia-effects = hprev.callHackage "heftia-effects" "0.5.0.0" { };
                   hyperbole =
                     let
-                      hp = prev.haskell.packages.ghc98.override {
+                      hp = prev.haskellPackages.override {
                         overrides = lib.composeManyExtensions [
                           (hfinal: hprev: {
-                            Diff = hprev.Diff_1_0_2;
-                            aeson = doJailbreak hprev.aeson_2_2_3_0;
-                            attoparsec-aeson = hprev.attoparsec-aeson_2_2_2_0;
                             data-default = hprev.data-default_0_8_0_0;
                             effectful = hprev.effectful_2_5_1_0;
                             effectful-core = hprev.effectful-core_2_5_1_0;
-                            http-api-data = doJailbreak (prev.haskell.packages.ghc98.override {
-                              overrides = _: _: {
-                                http-types = hprev.http-types;
-                                uuid-types = hprev.uuid-types_1_0_6;
-                              };
-                            }).http-api-data_0_6_1;
+                            http-api-data = doJailbreak hprev.http-api-data_0_6_1;
+                            hyperbole = hfinal.callHackageDirect
+                              {
+                                pkg = "hyperbole";
+                                ver = "0.4.3";
+                                sha256 = "sha256-dnftn/JYjuYIjn2DwcghUk4cyK4jl3jWCXggYW6tLk0=";
+                              }
+                              { };
                             web-view = dontCheck (doJailbreak (hprev.callHackageDirect
                               {
                                 pkg = "web-view";
@@ -184,13 +183,7 @@
                         ];
                       };
                     in
-                    dontCheck (hp.callHackageDirect
-                      {
-                        pkg = "hyperbole";
-                        ver = "0.4.2";
-                        sha256 = "sha256-ePgn94qv6JiPNEyBeJbR0LxpGY1iBJB94fxCqEBnOlw=";
-                      }
-                      { });
+                    dontCheck hp.hyperbole;
                   json-rpc = hprev.json-rpc_1_1_1;
                   kubernetes-client = hfinal.callCabal2nix "kubernetes-client" "${resolveLinks inputs.kubernetes-client}/kubernetes-client" { };
                   kubernetes-client-core = hfinal.callCabal2nix "kubernetes-client-core" "${resolveLinks inputs.kubernetes-client}/kubernetes-1.30" { };
