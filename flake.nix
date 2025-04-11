@@ -291,6 +291,7 @@
         map fixPackage [
           #discord-haskell-voice
           #heftia-effects
+          #tasty-flaky
           #websockets-rpc
           GLFW-b
           JuicyCairo
@@ -478,7 +479,11 @@
           syntax-printer
           systemd
           tasty-bench
+          tasty-discover
           tasty-hspec
+          tasty-inspection-testing
+          tasty-program
+          tasty-wai
           telegram-bot-simple
           text-rope-zipper
           these
