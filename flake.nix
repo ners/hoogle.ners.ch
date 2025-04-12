@@ -44,10 +44,7 @@
     };
     dosh = {
       url = "github:ners/dosh/rhine";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        rhine.follows = "rhine";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     rhine-chat = {
       url = "github:ners/rhine-chat";
@@ -145,6 +142,8 @@
                   ekg-wai = doJailbreak hprev.ekg-wai;
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   fraxl = doJailbreak (hfinal.callCabal2nix "fraxl" inputs.fraxl { });
+                  g2 = dontCheck (doJailbreak hprev.g2);
+                  g2q = dontCheck (doJailbreak hprev.g2q);
                   greskell = doJailbreak hprev.greskell;
                   greskell-websocket = doJailbreak hprev.greskell-websocket;
                   gtk = appendPatch
@@ -187,6 +186,28 @@
                   json-rpc = hprev.json-rpc_1_1_1;
                   kubernetes-client = hfinal.callCabal2nix "kubernetes-client" "${resolveLinks inputs.kubernetes-client}/kubernetes-client" { };
                   kubernetes-client-core = hfinal.callCabal2nix "kubernetes-client-core" "${resolveLinks inputs.kubernetes-client}/kubernetes-1.30" { };
+                  langchain-hs = dontCheck (hfinal.callHackageDirect
+                    {
+                      pkg = "langchain-hs";
+                      ver = "0.0.1.0";
+                      sha256 = "sha256-mrSGkya+3FJ93lGlR6A4Es30IhS/tYlWf+1kpqswLZU=";
+                    }
+                    { });
+                  ollama-haskell = dontCheck (hfinal.callHackageDirect
+                    {
+                      pkg = "ollama-haskell";
+                      ver = "0.1.3.0";
+                      sha256 = "sha256-CtqGD5ykiZQhq6+sYihRRdQ9qxgJ6he3m8GsYU61Iz8=";
+                    }
+                    { });
+                  tmp-postgres = dontCheck (hfinal.callCabal2nix "tmp-postgres"
+                    (prev.fetchFromGitHub {
+                      owner = "bitnomial";
+                      repo = "tmp-postgres";
+                      rev = "64f65752a14ffde5f8c68ce15d0ed5eedc7aeb1d";
+                      hash = "sha256-OYmKDwrkrhcXkLxGN1NKCWcZ1VC/V+JSnjD5mEGb0AU=";
+                    })
+                    { });
                   mighttpd2 =
                     let
                       hp = prev.haskellPackages.override {
@@ -244,7 +265,7 @@
                   co-log-effectful = hfinal.callCabal2nix "co-log-effectful" inputs.co-log-effectful { };
                   servant-effectful = dontCheck (hfinal.callCabal2nix "servant-effectful" inputs.servant-effectful { });
                   wai-middleware-auth = dontCheck (hfinal.callCabal2nix "wai-middleware-auth" inputs.wai-middleware-auth { });
-                  hoauth2 = doJailbreak (hprev.callHackage "hoauth2" "2.1.0" {});
+                  hoauth2 = doJailbreak (hprev.callHackage "hoauth2" "2.1.0" { });
                   servant-oauth2 = hprev.servant-oauth2.overrideAttrs (attrs: {
                     postPatch = ''
                       ${attrs.postPatch or ""}
@@ -337,6 +358,7 @@
           file-embed
           fir
           fraxl
+          g2q
           generic-arbitrary
           generic-lens
           generic-lens-lite
@@ -350,6 +372,11 @@
           greskell-websocket
           hashable
           haskell-modbus
+          hasql-effectful
+          hasql-migration
+          hasql-mover
+          hasql-queue
+          hasql-th
           hinotify
           hnix
           hoauth2
@@ -369,6 +396,7 @@
           json-rpc
           ki-effectful
           kubernetes-client
+          langchain-hs
           lens
           lens-family-th
           lens-regex
@@ -429,6 +457,7 @@
           rasterific-svg
           rattle
           rediscaching-haxl
+          rel8
           replace-attoparsec
           retry-effectful
           rhine-dbus
@@ -488,6 +517,7 @@
           text-rope-zipper
           these
           turtle
+          typechain
           typed-process-effectful
           units
           unliftio
