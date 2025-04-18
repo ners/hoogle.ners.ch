@@ -258,6 +258,20 @@
                     '';
                   });
                   opus = addPkgconfigDepend prev.libopus (hfinal.callCabal2nix "opus" inputs.opus { });
+                  parsable = hfinal.callHackageDirect
+                    {
+                      pkg = "parsable";
+                      ver = "0.1.0.0";
+                      sha256 = "sha256-G+TmJS0AeJ6ZZSGgi1S7zDxlk0rtGCmgNM26vFr248w=";
+                    }
+                    { };
+                  targeted-quickcheck = doJailbreak (hfinal.callHackageDirect
+                    {
+                      pkg = "targeted-quickcheck";
+                      ver = "0.1.0.1";
+                      sha256 = "sha256-hVwtWrf1Mz17mck/yDjyhTz1AVvZ++P7cMAXUgdy2gs=";
+                    }
+                    { });
                   perf = dontCheck (doJailbreak hprev.perf_0_14_0_1);
                   chart-svg = hprev.chart-svg_0_8_0_0;
                   numhask = hprev.numhask_0_12_1_0;
@@ -308,6 +322,7 @@
             pkgs.haskell.lib.compose.doHaddock
             (drv: drv.overrideAttrs (_: { meta.platforms = lib.platforms.all; }))
           ];
+          inherit (pkgs.haskell.packages.ghc98) json-spec-openapi;
         in
         map fixPackage [
           #discord-haskell-voice
@@ -394,6 +409,7 @@
           jose
           jose-jwt
           json-rpc
+          json-spec-openapi
           ki-effectful
           kubernetes-client
           langchain-hs
@@ -440,6 +456,7 @@
           optparse-th
           os-release
           pango
+          parsable
           parser-combinators
           path
           path-io
@@ -451,12 +468,15 @@
           prettyprinter
           process-extras
           qrcode-juicypixels
+          quickcheck-lockstep
+          quickcheck-state-machine
           quickcheck-webdriver
           random
           random-fu
           rasterific-svg
           rattle
           rediscaching-haxl
+          regex-applicative-text
           rel8
           replace-attoparsec
           retry-effectful
@@ -501,12 +521,14 @@
           skylighting
           slick
           stm-containers
+          string-random
           stroll
           svgcairo
           syntax
           syntax-attoparsec
           syntax-printer
           systemd
+          targeted-quickcheck
           tasty-bench
           tasty-discover
           tasty-hspec
@@ -532,6 +554,7 @@
           vulkan-utils
           wai
           wai-cli
+          wai-cors
           wai-extra
           wai-logger
           wai-middleware-auth
