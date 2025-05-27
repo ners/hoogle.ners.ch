@@ -276,11 +276,11 @@
         "wai-middleware-auth": "wai-middleware-auth"
       },
       "locked": {
-        "lastModified": 1747942778,
-        "narHash": "sha256-jF/8Cp1Zy6h2T3YBRjHCS2D2q3s+npeJZWYzI+UQX8Y=",
+        "lastModified": 1748280521,
+        "narHash": "sha256-oIQh2cc8w93LKpD/YY2MTfE6Lz7iKFaM63+5VIr02HY=",
         "owner": "nixcon",
         "repo": "nixcon-vouchers",
-        "rev": "1f51249b8c144ccca8ba3e049203fda7f45f6171",
+        "rev": "0b59b533824b1fbf0d3a35da7c4c0f715b449867",
         "type": "github"
       },
       "original": {
@@ -291,11 +291,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1747744144,
-        "narHash": "sha256-W7lqHp0qZiENCDwUZ5EX/lNhxjMdNapFnbErcbnP11Q=",
+        "lastModified": 1748190013,
+        "narHash": "sha256-R5HJFflOfsP5FBtk+zE8FpL8uqE7n62jqOsADvVshhE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "2795c506fe8fb7b03c36ccb51f75b6df0ab2553f",
+        "rev": "62b852f6c6742134ade1abdd2a21685fd617a291",
         "type": "github"
       },
       "original": {

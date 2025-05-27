@@ -169,6 +169,8 @@
                     dontCheck hp.hyperbole;
                   kubernetes-client = hfinal.callCabal2nix "kubernetes-client" "${resolveLinks inputs.kubernetes-client}/kubernetes-client" { };
                   kubernetes-client-core = hfinal.callCabal2nix "kubernetes-client-core" "${resolveLinks inputs.kubernetes-client}/kubernetes-1.30" { };
+
+                  lens-process = addSetupDepend hprev.cabal-doctest hprev.lens-process;
                   langchain-hs = dontCheck (hfinal.callHackageDirect
                     {
                       pkg = "langchain-hs";
@@ -287,6 +289,8 @@
           #tasty-flaky
           #websockets-json
           #websockets-rpc
+          AesonBson
+          Blammo-wai
           GLFW-b
           JuicyCairo
           JuicyPixels-extra
@@ -371,6 +375,7 @@
           langchain-hs
           lens
           lens-family-th
+          lens-process
           lens-regex
           lens-time
           libmodbus
@@ -397,6 +402,8 @@
           morpheus-graphql-client
           morpheus-graphql-server
           morpheus-graphql-subscriptions
+          myers-diff
+          named
           net-mqtt
           net-mqtt-lens
           net-mqtt-rpc
@@ -519,6 +526,7 @@
           waterfall-cad
           websockets-simple
           wreq-effectful
+          zip
         ];
       nixosModule = { pkgs, ... }:
         let pkgs' = pkgs.extend overlay; in
