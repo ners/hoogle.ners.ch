@@ -125,11 +125,11 @@
     "imgui-hs": {
       "flake": false,
       "locked": {
-        "lastModified": 1727880974,
-        "narHash": "sha256-xqmWOOlQpnvbXg2ROPscogcgMMnS4a4HyyKpITXev0s=",
+        "lastModified": 1748785346,
+        "narHash": "sha256-jl6/rVToToqqzzlLUwepRThxlQZVnfOFF5Rdi0lJFO8=",
         "owner": "haskell-game",
         "repo": "dear-imgui.hs",
-        "rev": "3526e6f70a0e0685a9a607d577480480f88e54db",
+        "rev": "c555b8d2f82840dd6eedccc30586782d1785ee12",
         "type": "github"
       },
       "original": {
@@ -276,11 +276,11 @@
         "wai-middleware-auth": "wai-middleware-auth"
       },
       "locked": {
-        "lastModified": 1748280521,
-        "narHash": "sha256-oIQh2cc8w93LKpD/YY2MTfE6Lz7iKFaM63+5VIr02HY=",
+        "lastModified": 1751397488,
+        "narHash": "sha256-XPSwtoErx2cc8WoW/3ID6AfiTmTs+/6ekaFJGGKEWE0=",
         "owner": "nixcon",
         "repo": "nixcon-vouchers",
-        "rev": "0b59b533824b1fbf0d3a35da7c4c0f715b449867",
+        "rev": "be50ec60dc8345202eaa70faad6e2da569c9091e",
         "type": "github"
       },
       "original": {
@@ -291,16 +291,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1748190013,
-        "narHash": "sha256-R5HJFflOfsP5FBtk+zE8FpL8uqE7n62jqOsADvVshhE=",
+        "lastModified": 1751370457,
+        "narHash": "sha256-Ydb8DghVy12loRfgR1jGa5MEp+C0zAyzSfP4q6+jagA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "62b852f6c6742134ade1abdd2a21685fd617a291",
+        "rev": "d1779090326fc6bd6eddfc606dd177055a199863",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable",
+        "ref": "haskell-updates",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -345,11 +345,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747644374,
-        "narHash": "sha256-XtY5hpcxJPeW6Im1N1pa0c7l0SHDOxnqDYxbJNe8JyA=",
+        "lastModified": 1748851874,
+        "narHash": "sha256-6K7hZqRP98bd1eVz7RecOtJ+YVifL+3r0T+21YSEb6Y=",
         "owner": "turion",
         "repo": "rhine",
-        "rev": "19b92e6a72c42c12ec0d10c005d713444b9310c8",
+        "rev": "b930f172b0868b2d64560c647db20908e95e582c",
         "type": "github"
       },
       "original": {

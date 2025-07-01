@@ -5,7 +5,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/haskell-updates";
     imgui = {
       url = "github:ocornut/imgui/v1.90.9";
       flake = false;
@@ -155,18 +155,6 @@
                     hprev.gtk;
                   heftia = hprev.callHackage "heftia" "0.5.0.0" { };
                   heftia-effects = hprev.callHackage "heftia-effects" "0.5.0.0" { };
-                  hyperbole =
-                    let
-                      hp = prev.haskellPackages.override {
-                        overrides = lib.composeManyExtensions [
-                          (hfinal: hprev: {
-                            data-default = hprev.data-default_0_8_0_1;
-                          })
-                          (unbreak-all prev)
-                        ];
-                      };
-                    in
-                    dontCheck hp.hyperbole;
                   kubernetes-client = hfinal.callCabal2nix "kubernetes-client" "${resolveLinks inputs.kubernetes-client}/kubernetes-client" { };
                   kubernetes-client-core = hfinal.callCabal2nix "kubernetes-client-core" "${resolveLinks inputs.kubernetes-client}/kubernetes-1.30" { };
 
@@ -360,7 +348,6 @@
           htmx-servant
           http-media
           http-types
-          hyperbole
           i3ipc
           inline-c
           inline-c-cpp
