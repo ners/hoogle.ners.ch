@@ -5,7 +5,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/haskell-updates";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     imgui = {
       url = "github:ocornut/imgui/v1.90.9";
       flake = false;
@@ -153,10 +153,22 @@
                       hash = "sha256-FaIohq7pEA4OnX/b6hBwsF5wcRO3uBtE2IsabJDGKT4=";
                     })
                     hprev.gtk;
-                  heftia = hprev.callHackage "heftia" "0.5.0.0" { };
-                  heftia-effects = hprev.callHackage "heftia-effects" "0.5.0.0" { };
+                  heftia = hprev.callHackage "heftia" "0.7.0.0" { };
+                  heftia-effects = hprev.callHackage "heftia-effects" "0.7.0.0" { };
                   kubernetes-client = hfinal.callCabal2nix "kubernetes-client" "${resolveLinks inputs.kubernetes-client}/kubernetes-client" { };
                   kubernetes-client-core = hfinal.callCabal2nix "kubernetes-client-core" "${resolveLinks inputs.kubernetes-client}/kubernetes-1.30" { };
+
+                  OTP = lib.pipe hprev.OTP [
+                    unmarkBroken
+                    (drv: drv.overrideAttrs (attrs: {
+                      patches = (attrs.patches or []) ++ [
+                        ./patches/OTP-remove-flag.patch
+                      ];
+                    }))
+                    (overrideCabal {
+                      libraryHaskellDepends = [ hprev.SHA ];
+                    })
+                  ];
 
                   lens-process = addSetupDepend hprev.cabal-doctest hprev.lens-process;
                   langchain-hs = dontCheck (hfinal.callHackageDirect
@@ -165,12 +177,14 @@
                       ver = "0.0.2.0";
                       sha256 = "sha256-DuLaD7+NdrVW55fvle4/xnPjHCnv2qQgh3wRSi4W8Jg=";
                     }
-                    { });
+                    {
+                      ollama-haskell = dontCheck (doJailbreak (unmarkBroken hprev.ollama-haskell));
+                    });
                   ollama-haskell = dontCheck (hfinal.callHackageDirect
                     {
                       pkg = "ollama-haskell";
-                      ver = "0.1.3.0";
-                      sha256 = "sha256-CtqGD5ykiZQhq6+sYihRRdQ9qxgJ6he3m8GsYU61Iz8=";
+                      ver = "0.2.0.0";
+                      sha256 = "sha256-ZnISgJgNzag64LjkeY8zwBgokbwVQ3fwTQ5lMDh8j6I=";
                     }
                     { });
                   tmp-postgres = dontCheck (hfinal.callCabal2nix "tmp-postgres"
@@ -197,8 +211,8 @@
                   targeted-quickcheck = doJailbreak (hfinal.callHackageDirect
                     {
                       pkg = "targeted-quickcheck";
-                      ver = "0.1.0.1";
-                      sha256 = "sha256-hVwtWrf1Mz17mck/yDjyhTz1AVvZ++P7cMAXUgdy2gs=";
+                      ver = "0.1.0.2";
+                      sha256 = "sha256-sasgcmmj/TFPc5Rw/oW7KAPP0An7xc6uyOfQICsGFMg=";
                     }
                     { });
                   perf = dontCheck (doJailbreak hprev.perf_0_14_0_2);
@@ -282,6 +296,7 @@
           GLFW-b
           JuicyCairo
           JuicyPixels-extra
+          OTP
           QuickCheck
           Rasterific
           aeson
