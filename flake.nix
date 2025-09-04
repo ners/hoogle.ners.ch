@@ -218,7 +218,7 @@
                   perf = dontCheck (doJailbreak hprev.perf_0_14_0_2);
                   postgres-effectful = dontCheck (doJailbreak (hfinal.callCabal2nix "postgres-effectful" inputs.postgres-effectful { }));
                   prettychart = hprev.prettychart_0_3_0_1;
-                  chart-svg = hprev.chart-svg_0_8_0_3;
+                  chart-svg = hprev.chart-svg_0_8_1_0;
                   changeset = dontCheck hprev.changeset;
                   numhask-space = hprev.numhask-space_0_13_0_0;
                   rel8 = doJailbreak hprev.rel8;
