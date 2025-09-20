@@ -38,6 +38,10 @@
       url = "github:snowleopard/stroll";
       flake = false;
     };
+    miso = {
+      url = "github:dmjio/miso";
+      flake = false;
+    };
     opus = {
       url = "github:yutotakano/opus";
       flake = false;
@@ -135,6 +139,15 @@
               packageOverrides = lib.composeManyExtensions [
                 prev.haskell.packageOverrides
                 (hfinal: hprev: {
+                  bluefin-random = hfinal.callHackageDirect
+                    {
+                      pkg = "bluefin-random";
+                      ver = "0.0.16.1";
+                      sha256 = "sha256-3hrZkcl3cYzFxVt/sLiuuH7vtQN+P2CaDbWW2/Tb5TA=";
+                    }
+                    {
+                      random = hprev.random_1_3_1;
+                    };
                   dhall = doJailbreak hprev.dhall;
                   dhall-json = doJailbreak hprev.dhall-json;
                   dhall-yaml = doJailbreak hprev.dhall-yaml;
@@ -161,7 +174,7 @@
                   OTP = lib.pipe hprev.OTP [
                     unmarkBroken
                     (drv: drv.overrideAttrs (attrs: {
-                      patches = (attrs.patches or []) ++ [
+                      patches = (attrs.patches or [ ]) ++ [
                         ./patches/OTP-remove-flag.patch
                       ];
                     }))
@@ -180,6 +193,7 @@
                     {
                       ollama-haskell = dontCheck (doJailbreak (unmarkBroken hprev.ollama-haskell));
                     });
+                  miso = hfinal.callCabal2nix "miso" inputs.miso { };
                   ollama-haskell = dontCheck (hfinal.callHackageDirect
                     {
                       pkg = "ollama-haskell";
@@ -303,6 +317,8 @@
           ansi-terminal
           attoparsec
           blaze-htmx
+          bluefin
+          bluefin-random
           brick
           brick-skylighting
           clash-ghc
