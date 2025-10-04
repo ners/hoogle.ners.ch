@@ -30,6 +30,10 @@
       url = "github:russellmcc/fraxl/bump-dependency-versions";
       flake = false;
     };
+    hasql-migration = {
+      url = "github:Skyfold/hasql-migration";
+      flake = false;
+    };
     kubernetes-client = {
       url = "github:kubernetes-client/haskell";
       flake = false;
@@ -61,6 +65,14 @@
     dosh = {
       url = "github:ners/dosh/rhine";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stacked = {
+      url = "github:tweag/stacked";
+      flake = false;
+    };
+    pup = {
+      url = "github:tweag/pup";
+      flake = false;
     };
     rhine-chat = {
       url = "github:ners/rhine-chat";
@@ -166,7 +178,16 @@
                       hash = "sha256-FaIohq7pEA4OnX/b6hBwsF5wcRO3uBtE2IsabJDGKT4=";
                     })
                     hprev.gtk;
+                  fastsum = doJailbreak (unmarkBroken hprev.fastsum);
+                  persist = doJailbreak (unmarkBroken hprev.persist);
+                  qrcode-core = doJailbreak (unmarkBroken hprev.qrcode-core);
+                  wai-app-file-cgi = dontCheck (doJailbreak (unmarkBroken hprev.wai-app-file-cgi));
+                  haskus-utils-variant = dontCheck (doJailbreak (unmarkBroken hprev.haskus-utils-variant));
+                  shake-path = doJailbreak hprev.shake-path;
                   heftia = hprev.callHackage "heftia" "0.7.0.0" { };
+                  data-effects = hprev.data-effects_0_4_2_0;
+                  data-effects-core = hprev.data-effects-core_0_4_3_0;
+                  data-effects-th = hprev.data-effects-th_0_4_2_1;
                   heftia-effects = hprev.callHackage "heftia-effects" "0.7.0.0" { };
                   kubernetes-client = hfinal.callCabal2nix "kubernetes-client" "${resolveLinks inputs.kubernetes-client}/kubernetes-client" { };
                   kubernetes-client-core = hfinal.callCabal2nix "kubernetes-client-core" "${resolveLinks inputs.kubernetes-client}/kubernetes-1.30" { };
@@ -183,7 +204,7 @@
                     })
                   ];
 
-                  lens-process = addSetupDepend hprev.cabal-doctest hprev.lens-process;
+                  lens-process = doJailbreak (addSetupDepend hprev.cabal-doctest hprev.lens-process);
                   langchain-hs = dontCheck (hfinal.callHackageDirect
                     {
                       pkg = "langchain-hs";
@@ -234,8 +255,25 @@
                   prettychart = hprev.prettychart_0_3_0_1;
                   chart-svg = hprev.chart-svg_0_8_1_0;
                   changeset = dontCheck hprev.changeset;
+                  ki-effectful = doJailbreak hprev.ki-effectful;
+                  retry-effectful = doJailbreak hprev.retry-effectful;
+                  crem = dontCheck (doJailbreak hprev.crem);
+                  typed-process-effectful = dontCheck (doJailbreak hprev.typed-process-effectful);
+                  plots = doJailbreak hprev.plots;
+                  typechain = doJailbreak hprev.typechain;
+                  dhall-csv = dontCheck (doJailbreak hprev.dhall-csv);
+                  dhall-recursive-adt = doJailbreak hprev.dhall-recursive-adt;
+                  shake-dhall = dontCheck hprev.shake-dhall;
+                  path-text-utf8 = doJailbreak hprev.path-text-utf8;
+                  shake-persist = doJailbreak hprev.shake-persist;
+                  lens-time = doJailbreak hprev.lens-time;
+                  quickcheck-webdriver = doJailbreak hprev.quickcheck-webdriver;
                   numhask-space = hprev.numhask-space_0_13_0_0;
                   rel8 = doJailbreak hprev.rel8;
+                  stacked = hprev.callCabal2nix "stacked" inputs.stacked {};
+                  pup = hprev.callCabal2nix "pup" inputs.pup {};
+                  hasql-effectful = setBuildTarget "hasql-effectful" (dontCheck (doJailbreak hprev.hasql-effectful));
+                  hasql-migration = dontCheck (hprev.callCabal2nix "hasql-migration" inputs.hasql-migration { });
                   hasql-mover = hfinal.callCabal2nix "hasql-mover"
                     (prev.fetchFromGitHub {
                       owner = "mikeplus64";
@@ -297,12 +335,10 @@
         map fixPackage [
           #discord-haskell-voice
           #g2q
-          #hasql-effectful
-          #heftia-effects
-          #quickcheck-lockstep
+          heftia-effects
+          #rattle
           #sdl2-image
           #sdl2-mixer
-          #tasty-flaky
           #websockets-json
           #websockets-rpc
           AesonBson
@@ -367,6 +403,7 @@
           greskell-websocket
           hashable
           haskell-modbus
+          hasql-effectful
           hasql-migration
           hasql-mover
           hasql-queue
@@ -425,6 +462,7 @@
           net-mqtt
           net-mqtt-lens
           net-mqtt-rpc
+          nonempty-containers
           notifications-tray-icon
           numhask
           numhask-space
@@ -449,14 +487,15 @@
           pretty-simple
           prettyprinter
           process-extras
+          pup
           qrcode-juicypixels
           quickcheck-dynamic
+          quickcheck-lockstep
           quickcheck-state-machine
           quickcheck-webdriver
           random
           random-fu
           rasterific-svg
-          rattle
           rediscaching-haxl
           regex-applicative-text
           rel8
@@ -511,6 +550,7 @@
           targeted-quickcheck
           tasty-bench
           tasty-discover
+          tasty-flaky
           tasty-hspec
           tasty-inspection-testing
           tasty-program
