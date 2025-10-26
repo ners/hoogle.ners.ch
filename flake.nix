@@ -631,7 +631,9 @@
           zip
         ];
       nixosModule = { pkgs, ... }:
-        let pkgs' = pkgs.extend overlay; in
+        let
+          pkgs' = inputs.nixpkgs.legacyPackages.${pkgs.system}.extend overlay;
+        in
         {
           services.hoogle = {
             inherit (pkgs') haskellPackages;
