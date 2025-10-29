@@ -186,6 +186,7 @@
                   dhall = doJailbreak hprev.dhall;
                   dhall-json = doJailbreak hprev.dhall-json;
                   dhall-yaml = doJailbreak hprev.dhall-yaml;
+                  diagrams-pandoc = dontCheck hprev.diagrams-pandoc;
                   discord-haskell-voice = addBuildDepend hfinal.opus hprev.discord-haskell-voice;
                   ekg-wai = doJailbreak hprev.ekg-wai;
                   fclabels = hfinal.callCabal2nix "fclabels" inputs.fclabels { };
