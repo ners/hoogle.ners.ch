@@ -30,11 +30,11 @@
         "web-font-mdi": "web-font-mdi"
       },
       "locked": {
-        "lastModified": 1761680003,
-        "narHash": "sha256-pU7BkwhCySNCOYrPBLPuRh7+z77JDEg96XEt+6DeKOA=",
+        "lastModified": 1761774183,
+        "narHash": "sha256-Ex6/frEDNUgnasfBlJGs0m6f9Jb2YUy4rvdk1CmNZaQ=",
         "owner": "ners",
         "repo": "dashi",
-        "rev": "7958b486885094d717212cb05547a3c30336b099",
+        "rev": "3d26b143db6d58f70fee49e51325db73db1e0ee9",
         "type": "github"
       },
       "original": {
@@ -180,11 +180,11 @@
       },
       "locked": {
         "host": "gitlab.haskell.org",
-        "lastModified": 1761658292,
-        "narHash": "sha256-oVZQS8X2YFLLqK0uWQxrznKd7gFnWdw/F5r9O1dJuK4=",
+        "lastModified": 1761769325,
+        "narHash": "sha256-USwjCfoXHtnn8ZXRthZqPommyIBTFmkHAuhAEMEwesY=",
         "owner": "haskell-wasm",
         "repo": "ghc-wasm-meta",
-        "rev": "3d8929d0d038b6aa9c9334c8d97082974177027a",
+        "rev": "8b1e0361d66eb11aca914b1219e269dfa798ed2f",
         "type": "gitlab"
       },
       "original": {
@@ -224,6 +224,22 @@
       "original": {
         "owner": "Skyfold",
         "repo": "hasql-migration",
+        "type": "github"
+      }
+    },
+    "haxl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1761063062,
+        "narHash": "sha256-ULQs7KL9fyYxnn9G2weIfSlCM5fMdzNT5dWCciaWHM0=",
+        "owner": "facebook",
+        "repo": "Haxl",
+        "rev": "7652bae93379dee568573d0e92139a443eff3916",
+        "type": "github"
+      },
+      "original": {
+        "owner": "facebook",
+        "repo": "Haxl",
         "type": "github"
       }
     },
@@ -318,11 +334,11 @@
     "langchain-hs": {
       "flake": false,
       "locked": {
-        "lastModified": 1761406266,
-        "narHash": "sha256-gosZWSOuvJ58F/+NIOOdBWfW6czVVxPsrdbL1lVEhgY=",
+        "lastModified": 1761906534,
+        "narHash": "sha256-Sdqg8twzrgdUP6OoyaQuarmx5boIvVeJL/DPrHsOctw=",
         "owner": "tusharad",
         "repo": "langchain-hs",
-        "rev": "2b4dcc8a369ba5393b65a00e702f9d7e841ab1b0",
+        "rev": "afccd8c0a13596410b03bfa39e8d6de6315628bc",
         "type": "github"
       },
       "original": {
@@ -405,11 +421,11 @@
     "miso": {
       "flake": false,
       "locked": {
-        "lastModified": 1761669754,
-        "narHash": "sha256-zP49Hkwp2tDnJVARHklUc8V98lQhpZ9QU4Ta2pXFn2g=",
+        "lastModified": 1761751971,
+        "narHash": "sha256-9OvRDh7+wxNSiBa8pYC3Uki2dG7xW1S2ucvwL8SAcrU=",
         "owner": "dmjio",
         "repo": "miso",
-        "rev": "ef08b6ab2eafbe7fe27026d5baf15e2c317ca3e2",
+        "rev": "2ce93123b39f0fb1ac5c2e1f506d2a4f52b1e33e",
         "type": "github"
       },
       "original": {
@@ -421,15 +437,15 @@
     "miso_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1761713054,
-        "narHash": "sha256-k2j1qcv0vp+dbhwM3uAAhmN2aKfe035ouTW/3xRlOTY=",
-        "owner": "dmjio",
+        "lastModified": 1761965803,
+        "narHash": "sha256-NLo+xwF0nDcyxJMp/8JaHRsHN2IANRXtpogaB3h0g8Q=",
+        "owner": "haskell-miso",
         "repo": "miso",
-        "rev": "cd7927a180fc67d944467918c3b4975ab359e48d",
+        "rev": "a9b7467993a22dc0d0a842695f6cadf2a0a01923",
         "type": "github"
       },
       "original": {
-        "owner": "dmjio",
+        "owner": "haskell-miso",
         "repo": "miso",
         "type": "github"
       }
@@ -457,28 +473,6 @@
       "original": {
         "owner": "ners",
         "repo": "nix-wasm",
-        "type": "github"
-      }
-    },
-    "nixcon-vouchers": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "servant-effectful": "servant-effectful",
-        "wai-middleware-auth": "wai-middleware-auth"
-      },
-      "locked": {
-        "lastModified": 1751397488,
-        "narHash": "sha256-XPSwtoErx2cc8WoW/3ID6AfiTmTs+/6ekaFJGGKEWE0=",
-        "owner": "nixcon",
-        "repo": "nixcon-vouchers",
-        "rev": "be50ec60dc8345202eaa70faad6e2da569c9091e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixcon",
-        "repo": "nixcon-vouchers",
         "type": "github"
       }
     },
@@ -653,12 +647,12 @@
         "fir": "fir",
         "fraxl": "fraxl",
         "hasql-migration": "hasql-migration",
+        "haxl": "haxl",
         "imgui": "imgui",
         "imgui-hs": "imgui-hs",
         "kubernetes-client": "kubernetes-client",
         "langchain-hs": "langchain-hs",
         "miso": "miso_2",
-        "nixcon-vouchers": "nixcon-vouchers",
         "nixpkgs": "nixpkgs",
         "ollama-haskell": "ollama-haskell",
         "opus": "opus",
@@ -668,6 +662,7 @@
         "rhine-chat": "rhine-chat",
         "rhine-linux": "rhine-linux",
         "rhine-sdl2": "rhine-sdl2",
+        "servant-effectful": "servant-effectful",
         "stacked": "stacked",
         "stroll": "stroll",
         "syntax": "syntax_2",
@@ -721,16 +716,15 @@
     "servant-effectful": {
       "flake": false,
       "locked": {
-        "lastModified": 1747637687,
-        "narHash": "sha256-D2lPf8pmqXPkFVlWvufw6DPC3x19zE9Ygqgiodm8+aE=",
-        "owner": "ners",
+        "lastModified": 1752158470,
+        "narHash": "sha256-kiCVdD4D6SlJ2nMAotwziQ/38u6gWhVpyE3VQJ+xKKw=",
+        "owner": "Diamondy4",
         "repo": "servant-effectful",
-        "rev": "1720eefdbdeedaec36b67c6d84eac148fab92e1d",
+        "rev": "916735cf75cbdeff252e2bbff48bed1d0d64a0dd",
         "type": "github"
       },
       "original": {
-        "owner": "ners",
-        "ref": "update",
+        "owner": "Diamondy4",
         "repo": "servant-effectful",
         "type": "github"
       }
@@ -890,23 +884,6 @@
       "original": {
         "owner": "ners",
         "repo": "vodozemac-haskell",
-        "type": "github"
-      }
-    },
-    "wai-middleware-auth": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1747488484,
-        "narHash": "sha256-T01i3cDdV1OPFpt7mzHrxCNdz4h3HFCccXebWXwz2kk=",
-        "owner": "ners",
-        "repo": "wai-middleware-auth",
-        "rev": "a565792ccac50e0a785d63b4de59de50cfc695bb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ners",
-        "ref": "update",
-        "repo": "wai-middleware-auth",
         "type": "github"
       }
     },

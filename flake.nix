@@ -34,6 +34,10 @@
       url = "github:Skyfold/hasql-migration";
       flake = false;
     };
+    haxl = {
+      url = "github:facebook/Haxl";
+      flake = false;
+    };
     imgui = {
       url = "github:ocornut/imgui/v1.90.9";
       flake = false;
@@ -51,12 +55,8 @@
       flake = false;
     };
     miso = {
-      url = "github:dmjio/miso";
+      url = "github:haskell-miso/miso";
       flake = false;
-    };
-    nixcon-vouchers = {
-      url = "github:nixcon/nixcon-vouchers";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     ollama-haskell = {
       url = "github:tusharad/ollama-haskell";
@@ -89,6 +89,10 @@
     rhine-sdl2 = {
       url = "github:ners/rhine-sdl2";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    servant-effectful = {
+      url = "github:Diamondy4/servant-effectful";
+      flake = false;
     };
     stacked = {
       url = "github:tweag/stacked";
@@ -145,7 +149,6 @@
           inputs.rhine-sdl2.overlays.default
           inputs.syntax.overlays.default
           inputs.vodozemac.overlays.default
-          inputs.nixcon-vouchers.overlays.default
           inputs.dashi.overlays.default
           (final: prev: with prev.haskell.lib.compose; {
             haskell = prev.haskell // {
@@ -202,6 +205,7 @@
                       hash = "sha256-FaIohq7pEA4OnX/b6hBwsF5wcRO3uBtE2IsabJDGKT4=";
                     })
                     hprev.gtk;
+                  haxl = hfinal.callCabal2nix "haxl" inputs.haxl { };
                   shake-path = doJailbreak hprev.shake-path;
                   heftia = hprev.callHackage "heftia" "0.7.0.0" { };
                   heftia-effects = hprev.callHackage "heftia-effects" "0.7.0.0" { };
@@ -306,6 +310,7 @@
                   co-log-effectful = doJailbreak (hfinal.callCabal2nix "co-log-effectful" inputs.co-log-effectful { });
                   co-log-json = doJailbreak hprev.co-log-json;
                   qrcode-juicypixels = doJailbreak hprev.qrcode-juicypixels;
+                  servant-effectful = doJailbreak (hfinal.callCabal2nix "servant-effectful" inputs.servant-effectful { });
                   servant-serialization = dontCheck (doJailbreak hprev.servant-serialization);
                   servant-rate-limit = dontCheck hprev.servant-rate-limit;
                   stroll = lib.pipe { } [
@@ -378,6 +383,7 @@
           aeson
           ansi-terminal
           attoparsec
+          bench-show
           blaze-htmx
           bluefin
           bluefin-random
@@ -389,6 +395,7 @@
           co-log-json
           co-log-simple
           criterion
+          cursor
           dashi
           data-default
           data-fix
@@ -402,7 +409,9 @@
           diagrams
           diagrams-cairo
           diagrams-canvas
+          diagrams-graphviz
           diagrams-pandoc
+          diagrams-qrcode
           diagrams-svg
           dimensional
           dimensional-codata
@@ -607,10 +616,26 @@
           turtle
           typechain
           typed-process-effectful
+          typed-uuid
           units
           unliftio
           unordered-containers
           uuid
+          validity-aeson
+          validity-bytestring
+          validity-case-insensitive
+          validity-containers
+          validity-dlist
+          validity-network-uri
+          validity-path
+          validity-persistent
+          validity-primitive
+          validity-scientific
+          validity-text
+          validity-time
+          validity-unordered-containers
+          validity-uuid
+          validity-vector
           vec
           vec-lens
           vector
