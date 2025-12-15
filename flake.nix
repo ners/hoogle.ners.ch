@@ -5,17 +5,24 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:ners/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     co-log-effectful = {
       url = "github:eldritch-cookie/co-log-effectful";
       flake = false;
     };
     dashi = {
       url = "github:ners/dashi";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        miso.follows = "miso";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     dosh = {
       url = "github:ners/dosh/rhine";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dramaturge = {
+      url = "github:ners/dramaturge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     fclabels = {
@@ -23,7 +30,7 @@
       flake = false;
     };
     fir = {
-      url = "git+https://gitlab.com/sheaf/fir.git";
+      url = "gitlab:sheaf/fir";
       flake = false;
     };
     fraxl = {
@@ -150,55 +157,42 @@
           inputs.syntax.overlays.default
           inputs.vodozemac.overlays.default
           inputs.dashi.overlays.default
+          inputs.dramaturge.overlays.default
           (final: prev: with prev.haskell.lib.compose; {
             haskell = prev.haskell // {
               packageOverrides = lib.composeManyExtensions [
                 prev.haskell.packageOverrides
                 inputs.dosh.overlays.haskell
                 (hfinal: hprev: {
+                  bluefin = hfinal.callHackageDirect
+                    {
+                      pkg = "bluefin";
+                      ver = "0.2.1.0";
+                      sha256 = "sha256-o0N/3oCEV5Zpj1aTCjNPN/QqJxbniI60jBVnN/enmhQ=";
+                    }
+                    { };
+                  bluefin-internal = doJailbreak (hfinal.callHackageDirect
+                    {
+                      pkg = "bluefin-internal";
+                      ver = "0.2.1.0";
+                      sha256 = "sha256-e8vTt4t5gkvTvDaEddnX1871ydgyupFvUcGjaUj0b1c=";
+                    }
+                    { });
                   bluefin-random = hfinal.callHackageDirect
                     {
                       pkg = "bluefin-random";
-                      ver = "0.0.16.1";
-                      sha256 = "sha256-3hrZkcl3cYzFxVt/sLiuuH7vtQN+P2CaDbWW2/Tb5TA=";
+                      ver = "0.2.0.0";
+                      sha256 = "sha256-sm/BVLhfGj6n9TaUcn+4fPZHHsGn9ZaLqc9FJZM1hvk=";
                     }
                     {
                       random = hprev.random_1_3_1;
                     };
-                  clash-prelude = dontCheck (hfinal.callHackageDirect
-                    {
-                      pkg = "clash-prelude";
-                      ver = "1.8.3";
-                      sha256 = "sha256-icmvs3m749A7vgF3C643kfgsMPmvhIh34gSmjWUni6I=";
-                    }
-                    { });
-                  clash-ghc = dontCheck (hfinal.callHackageDirect
-                    {
-                      pkg = "clash-ghc";
-                      ver = "1.8.3";
-                      sha256 = "sha256-udCNmEWrQ+uWezgcLccuhzDDgZPNvCTHccAgvz9K2PQ=";
-                    }
-                    { });
-                  clash-lib = dontCheck (hfinal.callHackageDirect
-                    {
-                      pkg = "clash-lib";
-                      ver = "1.8.3";
-                      sha256 = "sha256-ZSMR2uBS4BWSYgVGz47FDrAxDfgjCvvfma5quGf2kzo=";
-                    }
-                    { });
-                  dhall = doJailbreak hprev.dhall;
-                  dhall-json = doJailbreak hprev.dhall-json;
-                  dhall-yaml = doJailbreak hprev.dhall-yaml;
-                  diagrams-pandoc = dontCheck hprev.diagrams-pandoc;
                   discord-haskell-voice = addBuildDepend hfinal.opus hprev.discord-haskell-voice;
-                  ekg-wai = doJailbreak hprev.ekg-wai;
                   fclabels = hfinal.callCabal2nix "fclabels" inputs.fclabels { };
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   fraxl = doJailbreak (hfinal.callCabal2nix "fraxl" inputs.fraxl { });
                   g2 = dontCheck (doJailbreak hprev.g2);
                   g2q = dontCheck (doJailbreak hprev.g2q);
-                  greskell = doJailbreak hprev.greskell;
-                  greskell-websocket = doJailbreak hprev.greskell-websocket;
                   gtk = appendPatch
                     (prev.fetchpatch {
                       url = "https://github.com/gtk2hs/gtk2hs/commit/ca7f98bd3e9462deac3661244dc76004a36fc8c3.patch";
@@ -206,9 +200,6 @@
                     })
                     hprev.gtk;
                   haxl = hfinal.callCabal2nix "haxl" inputs.haxl { };
-                  shake-path = doJailbreak hprev.shake-path;
-                  heftia = hprev.callHackage "heftia" "0.7.0.0" { };
-                  heftia-effects = hprev.callHackage "heftia-effects" "0.7.0.0" { };
                   kubernetes-client =
                     lib.pipe inputs.kubernetes-client [
                       resolveLinks
@@ -233,10 +224,16 @@
                       libraryHaskellDepends = [ hprev.SHA ];
                     })
                   ];
-
                   lens-process = doJailbreak (addSetupDepend hprev.cabal-doctest hprev.lens-process);
                   ollama-haskell = hfinal.callCabal2nix "ollama-haskell" inputs.ollama-haskell { };
                   langchain-hs = dontCheck (hfinal.callCabal2nix "langchain-hs" inputs.langchain-hs { });
+                  openai = dontCheck (hfinal.callHackageDirect
+                    {
+                      pkg = "openai";
+                      ver = "2.2.1";
+                      sha256 = "sha256-4JOUrXV4Zixu+T7q4O9V3mwacyG+t86L9htBPowlTC0=";
+                    }
+                    { });
                   miso = hfinal.callCabal2nix "miso" inputs.miso { };
                   monomer-hagrid = doJailbreak hprev.monomer-hagrid;
                   tmp-postgres = dontCheck (hfinal.callCabal2nix "tmp-postgres"
@@ -255,36 +252,7 @@
                     '';
                   });
                   opus = addPkgconfigDepend prev.libopus (hfinal.callCabal2nix "opus" inputs.opus { });
-                  parsable = hfinal.callHackageDirect
-                    {
-                      pkg = "parsable";
-                      ver = "0.1.0.0";
-                      sha256 = "sha256-G+TmJS0AeJ6ZZSGgi1S7zDxlk0rtGCmgNM26vFr248w=";
-                    }
-                    { };
-                  targeted-quickcheck = doJailbreak (hfinal.callHackageDirect
-                    {
-                      pkg = "targeted-quickcheck";
-                      ver = "0.1.0.2";
-                      sha256 = "sha256-sasgcmmj/TFPc5Rw/oW7KAPP0An7xc6uyOfQICsGFMg=";
-                    }
-                    { });
                   postgres-effectful = dontCheck (doJailbreak (hfinal.callCabal2nix "postgres-effectful" inputs.postgres-effectful { }));
-                  changeset = dontCheck hprev.changeset;
-                  ki-effectful = doJailbreak hprev.ki-effectful;
-                  retry-effectful = doJailbreak hprev.retry-effectful;
-                  typed-process-effectful = dontCheck (doJailbreak hprev.typed-process-effectful);
-                  plots = doJailbreak hprev.plots;
-                  text-rope-zipper = doJailbreak hprev.text-rope-zipper;
-                  typechain = doJailbreak hprev.typechain;
-                  dhall-csv = dontCheck (doJailbreak hprev.dhall-csv);
-                  dhall-recursive-adt = doJailbreak hprev.dhall-recursive-adt;
-                  shake-dhall = dontCheck hprev.shake-dhall;
-                  path-text-utf8 = doJailbreak hprev.path-text-utf8;
-                  shake-persist = doJailbreak hprev.shake-persist;
-                  lens-time = doJailbreak hprev.lens-time;
-                  quickcheck-webdriver = doJailbreak hprev.quickcheck-webdriver;
-                  rel8 = doJailbreak hprev.rel8;
                   stacked = hprev.callCabal2nix "stacked" inputs.stacked { };
                   pup = hprev.callCabal2nix "pup" inputs.pup { };
                   hasql-effectful = setBuildTarget "hasql-effectful" (dontCheck (doJailbreak hprev.hasql-effectful));
@@ -308,7 +276,6 @@
                     '';
                   });
                   co-log-effectful = doJailbreak (hfinal.callCabal2nix "co-log-effectful" inputs.co-log-effectful { });
-                  co-log-json = doJailbreak hprev.co-log-json;
                   qrcode-juicypixels = doJailbreak hprev.qrcode-juicypixels;
                   servant-effectful = doJailbreak (hfinal.callCabal2nix "servant-effectful" inputs.servant-effectful { });
                   servant-serialization = dontCheck (doJailbreak hprev.servant-serialization);
@@ -364,8 +331,8 @@
         map fixPackage [
           #crem
           #discord-haskell-voice
+          #fir
           #g2q
-          #rattle
           #sdl2-image
           #sdl2-mixer
           #servant-oauth2
@@ -375,12 +342,14 @@
           AesonBson
           Blammo-wai
           GLFW-b
+          HDBC-odbc
           JuicyCairo
           JuicyPixels-extra
           OTP
           QuickCheck
           Rasterific
           aeson
+          aeson-possible
           ansi-terminal
           attoparsec
           bench-show
@@ -389,6 +358,8 @@
           bluefin-random
           brick
           brick-skylighting
+          bson-generic
+          bson-lens
           clash-ghc
           clash-shake
           co-log-effectful
@@ -417,6 +388,7 @@
           dimensional-codata
           discord-haskell
           dosh
+          dramaturge
           effectful
           either
           ekg
@@ -426,7 +398,6 @@
           esqueleto
           extra
           file-embed
-          fir
           fraxl
           generic-arbitrary
           generic-lens
@@ -467,6 +438,7 @@
           inline-c-cpp
           io-classes
           io-sim
+          iri
           isomorphism-class
           jose
           jose-jwt
@@ -494,6 +466,7 @@
           mighttpd2
           miso
           monad-control
+          monad-effect
           monad-logger
           monad-logger-aeson
           monad-logger-extras
@@ -532,6 +505,12 @@
           path-io
           path-text-utf8
           perf
+          persistent-ip
+          persistent-lens
+          persistent-pagination
+          persistent-postgresql
+          persistent-redis
+          persistent-sqlite
           plot
           plots
           postgres-effectful
@@ -547,6 +526,7 @@
           random
           random-fu
           rasterific-svg
+          rattle
           rediscaching-haxl
           regex-applicative-text
           rel8
@@ -572,6 +552,7 @@
           servant-rate-limit
           servant-serialization
           servant-server
+          servant-swagger-ui
           servant-websockets
           shake
           shake-bench
@@ -647,6 +628,7 @@
           wai-cli
           wai-cors
           wai-extra
+          wai-log
           wai-logger
           wai-transformers
           warp
