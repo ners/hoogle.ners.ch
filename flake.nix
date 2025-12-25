@@ -188,6 +188,7 @@
                       random = hprev.random_1_3_1;
                     };
                   discord-haskell-voice = addBuildDepend hfinal.opus hprev.discord-haskell-voice;
+                  e11y-otel = dontCheck (doJailbreak hprev.e11y-otel);
                   fclabels = hfinal.callCabal2nix "fclabels" inputs.fclabels { };
                   fir = dontCheck (doJailbreak (hfinal.callCabal2nix "fir" inputs.fir { }));
                   fraxl = doJailbreak (hfinal.callCabal2nix "fraxl" inputs.fraxl { });
@@ -331,6 +332,8 @@
         map fixPackage [
           #crem
           #discord-haskell-voice
+          #ekg-elasticsearch
+          #ekg-log
           #fir
           #g2q
           #sdl2-image
@@ -365,6 +368,7 @@
           co-log-effectful
           co-log-json
           co-log-simple
+          composite-ekg
           criterion
           cursor
           dashi
@@ -389,6 +393,7 @@
           discord-haskell
           dosh
           dramaturge
+          e11y-otel
           effectful
           either
           ekg
@@ -471,6 +476,7 @@
           monad-logger-aeson
           monad-logger-extras
           monad-metrics
+          monad-metrics-extensible
           monad-time-effectful
           monomer
           monomer-hagrid
@@ -517,6 +523,10 @@
           pretty-simple
           prettyprinter
           process-extras
+          prometheus-metrics-ghc
+          prometheus-proc
+          prometheus-wai
+          prometheus-wai-middleware
           pup
           qrcode-juicypixels
           quickcheck-dynamic
@@ -545,9 +555,11 @@
           servant-blaze
           servant-client
           servant-effectful
+          servant-ekg
           servant-jsonrpc
           servant-multipart-client
           servant-openapi3
+          servant-prometheus
           servant-quickcheck
           servant-rate-limit
           servant-serialization
@@ -630,6 +642,7 @@
           wai-extra
           wai-log
           wai-logger
+          wai-middleware-prometheus
           wai-transformers
           warp
           warp-systemd
