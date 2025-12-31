@@ -141,6 +141,7 @@
       overlay = final: prev:
         let
           inherit (prev) lib;
+          inherit (prev.stdenvNoCC) hostPlatform;
           resolveLinks = input: prev.runCommandNoCC "source" { } /*bash*/ ''
             cd ${input}
             find . -not -type d | while read f; do
@@ -149,6 +150,7 @@
             done
           '';
         in
+        with prev.haskell.lib.compose;
         lib.composeManyExtensions [
           inputs.rhine.overlays.default
           inputs.rhine-chat.overlays.default
@@ -158,7 +160,7 @@
           inputs.vodozemac.overlays.default
           inputs.dashi.overlays.default
           inputs.dramaturge.overlays.default
-          (final: prev: with prev.haskell.lib.compose; {
+          (final: prev: {
             haskell = prev.haskell // {
               packageOverrides = lib.composeManyExtensions [
                 prev.haskell.packageOverrides
@@ -315,6 +317,9 @@
                     ++ attrs.nativeBuildInputs or [ ];
                   });
                 })
+                (hfinal: hprev: lib.optionalAttrs hostPlatform.isAarch64 {
+                  diagrams-pandoc = dontCheck hprev.diagrams-pandoc;
+                })
                 (unbreak-all prev)
               ];
             };
@@ -428,6 +433,7 @@
           hinotify
           hnix
           hoauth2
+          hocon
           hs-opentelemetry-instrumentation-hspec
           hs-opentelemetry-instrumentation-postgresql-simple
           hs-opentelemetry-instrumentation-tasty
@@ -649,6 +655,7 @@
           waterfall-cad
           websockets-simple
           wreq-effectful
+          zigbee-znet25
           zip
         ];
       nixosModule = { pkgs, ... }:
