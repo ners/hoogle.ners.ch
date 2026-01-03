@@ -453,6 +453,7 @@
           isomorphism-class
           jose
           jose-jwt
+          jsaddle
           json-rpc
           json-spec-openapi
           ki-effectful
