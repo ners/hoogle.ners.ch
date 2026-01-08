@@ -169,17 +169,18 @@
                   bluefin = hfinal.callHackageDirect
                     {
                       pkg = "bluefin";
-                      ver = "0.2.1.0";
-                      sha256 = "sha256-o0N/3oCEV5Zpj1aTCjNPN/QqJxbniI60jBVnN/enmhQ=";
+                      ver = "0.2.5.0";
+                      sha256 = "sha256-k1nrJvYJ3hZcIHQN+1XmEPdQqrBqgYwTT1tiEj+nf0w=";
                     }
                     { };
-                  bluefin-internal = doJailbreak (hfinal.callHackageDirect
+                  bluefin-algae = doJailbreak hprev.bluefin-algae;
+                  bluefin-internal = hfinal.callHackageDirect
                     {
                       pkg = "bluefin-internal";
-                      ver = "0.2.1.0";
-                      sha256 = "sha256-e8vTt4t5gkvTvDaEddnX1871ydgyupFvUcGjaUj0b1c=";
+                      ver = "0.3.3.0";
+                      sha256 = "sha256-xnXpU9yuAOLHmzRcLU/fLxNl80xK0HoPVx/QLx2zOMQ=";
                     }
-                    { });
+                    { };
                   bluefin-random = hfinal.callHackageDirect
                     {
                       pkg = "bluefin-random";
@@ -343,6 +344,7 @@
           #g2q
           #sdl2-image
           #sdl2-mixer
+          #servant-dhall
           #servant-oauth2
           #wai-middleware-auth
           #websockets-json
@@ -362,8 +364,9 @@
           attoparsec
           bench-show
           blaze-htmx
-          bluefin
+          bluefin-algae
           bluefin-random
+          borsh
           brick
           brick-skylighting
           bson-generic
@@ -375,6 +378,7 @@
           co-log-simple
           composite-ekg
           criterion
+          crypto-rng-effectful
           cursor
           dashi
           data-default
@@ -400,6 +404,8 @@
           dramaturge
           e11y-otel
           effectful
+          effectful-st
+          effectful-th
           either
           ekg
           ekg-prometheus-adapter
@@ -410,6 +416,7 @@
           file-embed
           fraxl
           generic-arbitrary
+          generic-diff
           generic-lens
           generic-lens-lite
           generic-optics
@@ -455,6 +462,7 @@
           jose-jwt
           jsaddle
           json-rpc
+          json-sop
           json-spec-openapi
           ki-effectful
           kubernetes-client
@@ -548,6 +556,8 @@
           regex-applicative-text
           rel8
           replace-attoparsec
+          resource-effectful
+          resourcet-effectful
           retry-effectful
           rhine-dbus
           rhine-i3
