@@ -169,16 +169,16 @@
                   bluefin = hfinal.callHackageDirect
                     {
                       pkg = "bluefin";
-                      ver = "0.2.5.0";
-                      sha256 = "sha256-k1nrJvYJ3hZcIHQN+1XmEPdQqrBqgYwTT1tiEj+nf0w=";
+                      ver = "0.2.6.0";
+                      sha256 = "sha256-qZuiA7NU+yL78QdzFHTAgTIT7VRTJ/fyl4NDormDOOA=";
                     }
                     { };
                   bluefin-algae = doJailbreak hprev.bluefin-algae;
                   bluefin-internal = hfinal.callHackageDirect
                     {
                       pkg = "bluefin-internal";
-                      ver = "0.3.3.0";
-                      sha256 = "sha256-xnXpU9yuAOLHmzRcLU/fLxNl80xK0HoPVx/QLx2zOMQ=";
+                      ver = "0.3.4.0";
+                      sha256 = "sha256-vLgbSsD0ycB67ihWLtJTK+mOk7ZpkOdzGBANUWHpMYY=";
                     }
                     { };
                   bluefin-random = hfinal.callHackageDirect
@@ -190,6 +190,14 @@
                     {
                       random = hprev.random_1_3_1;
                     };
+                  dataframe = hfinal.callHackageDirect
+                    {
+                      pkg = "dataframe";
+                      ver = "0.3.3.6";
+                      sha256 = "sha256-4/O93bE21wTxN/LNWpDmr17o3bo+Xhq1qoB8qG6cq+E=";
+                    }
+                    { };
+                  ihaskell-dataframe = doJailbreak hprev.ihaskell-dataframe;
                   discord-haskell-voice = addBuildDepend hfinal.opus hprev.discord-haskell-voice;
                   e11y-otel = dontCheck (doJailbreak hprev.e11y-otel);
                   fclabels = hfinal.callCabal2nix "fclabels" inputs.fclabels { };
@@ -231,13 +239,13 @@
                   lens-process = doJailbreak (addSetupDepend hprev.cabal-doctest hprev.lens-process);
                   ollama-haskell = hfinal.callCabal2nix "ollama-haskell" inputs.ollama-haskell { };
                   langchain-hs = dontCheck (hfinal.callCabal2nix "langchain-hs" inputs.langchain-hs { });
-                  openai = dontCheck (hfinal.callHackageDirect
-                    {
-                      pkg = "openai";
-                      ver = "2.2.1";
-                      sha256 = "sha256-4JOUrXV4Zixu+T7q4O9V3mwacyG+t86L9htBPowlTC0=";
-                    }
-                    { });
+                  #openai = dontCheck (hfinal.callHackageDirect
+                  #  {
+                  #    pkg = "openai";
+                  #    ver = "2.2.1";
+                  #    sha256 = "sha256-4JOUrXV4Zixu+T7q4O9V3mwacyG+t86L9htBPowlTC0=";
+                  #  }
+                  #  { });
                   miso = hfinal.callCabal2nix "miso" inputs.miso { };
                   monomer-hagrid = doJailbreak hprev.monomer-hagrid;
                   tmp-postgres = dontCheck (hfinal.callCabal2nix "tmp-postgres"
@@ -362,6 +370,7 @@
           aeson-possible
           ansi-terminal
           attoparsec
+          avatar-generator
           bench-show
           blaze-htmx
           bluefin-algae
@@ -384,6 +393,7 @@
           data-default
           data-fix
           data-textual
+          dataframe-hasktorch
           deepseq-generics
           dhall
           dhall-csv
@@ -421,11 +431,14 @@
           generic-lens-lite
           generic-optics
           generic-optics-lite
+          generic-persistence
           gerrit
           ghc-source-gen
           ghc-syntax-highlighter
           github
           github-rest
+          graphql-spice
+          gravatar
           greskell
           greskell-websocket
           hashable
@@ -437,6 +450,7 @@
           hasql-queue
           hasql-th
           heftia-effects
+          hermes-json
           hinotify
           hnix
           hoauth2
@@ -452,6 +466,8 @@
           http-media
           http-types
           i3ipc
+          identicon-style-squares
+          ihaskell-dataframe
           inline-c
           inline-c-cpp
           io-classes
@@ -474,8 +490,10 @@
           lens-regex
           lens-time
           libmodbus
+          libravatar
           lifted-base
           log-effectful
+          logging-effect-colors
           lrucaching-haxl
           lsp-client
           lsp-test
@@ -528,14 +546,19 @@
           perf
           persistent-ip
           persistent-lens
+          persistent-mtl
           persistent-pagination
           persistent-postgresql
+          persistent-qq
           persistent-redis
+          persistent-sql-lifted
           persistent-sqlite
+          pixelated-avatar-generator
           plot
           plots
           postgres-effectful
           pretty-simple
+          pretty-sop
           prettyprinter
           process-extras
           prometheus-metrics-ghc
@@ -602,6 +625,7 @@
           sqlite-simple
           squeal-postgresql
           stm-containers
+          streaming-utils
           string-random
           stroll
           svgcairo

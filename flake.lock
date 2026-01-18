@@ -33,11 +33,11 @@
         "web-font-mdi": "web-font-mdi"
       },
       "locked": {
-        "lastModified": 1767688262,
-        "narHash": "sha256-gYXqlDPDb+ofoCM7UJ6DThQDeOJIs8vjF2Ioa7BdvRg=",
+        "lastModified": 1768749027,
+        "narHash": "sha256-I7h2KUycrDCA5YaoyHvhOIyKEsVBnlyjwo2w6vnyhHU=",
         "owner": "ners",
         "repo": "dashi",
-        "rev": "64728684fb29a7631e40e87d734854e446966d4e",
+        "rev": "71cf88252b8c236737e244d6d3c0ccc92b4dfa22",
         "type": "github"
       },
       "original": {
@@ -193,6 +193,22 @@
         "type": "github"
       }
     },
+    "ghc-source-gen": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767727283,
+        "narHash": "sha256-TsPEK0I5c9FYqZp0lAzQNogqEv1LPMzdjFO9EtOm/Ls=",
+        "owner": "google",
+        "repo": "ghc-source-gen",
+        "rev": "79ecc01213131da03a7198fc377606ce72ac037a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "google",
+        "repo": "ghc-source-gen",
+        "type": "github"
+      }
+    },
     "ghc-wasm-meta": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -203,17 +219,16 @@
       },
       "locked": {
         "host": "gitlab.haskell.org",
-        "lastModified": 1762008043,
-        "narHash": "sha256-CLVqoTiBeysUdGJeZFPyDNgRVSArrTXEBiGUZZjQYM4=",
-        "owner": "ners",
+        "lastModified": 1768429988,
+        "narHash": "sha256-d0o0aQwuDRjgYTNxF0xmLCyo6hgPxBiumeUWbiXsit0=",
+        "owner": "haskell-wasm",
         "repo": "ghc-wasm-meta",
-        "rev": "c0c7ca4158cca7d1d3f3afba0eaff725cbd7d1a0",
+        "rev": "a92a4ef3b34dbe9aab26f051bbd25d35a1b8769f",
         "type": "gitlab"
       },
       "original": {
         "host": "gitlab.haskell.org",
-        "owner": "ners",
-        "ref": "fix-nix-hostPlatform",
+        "owner": "haskell-wasm",
         "repo": "ghc-wasm-meta",
         "type": "gitlab"
       }
@@ -445,11 +460,11 @@
     "miso": {
       "flake": false,
       "locked": {
-        "lastModified": 1767726392,
-        "narHash": "sha256-Hag18x+at/LWIpoAGajbr06sqWMhkGSFA65UgD7sUHA=",
+        "lastModified": 1768532082,
+        "narHash": "sha256-nLTHRWTFaMw5qD55Kcuw1iWVgG64X2MUAlWk3edj9mI=",
         "owner": "haskell-miso",
         "repo": "miso",
-        "rev": "c60708f2cfc7e956bd90303cda501d77f7e3af64",
+        "rev": "7e026d8e7668867623ff7c546add70a2551bad7a",
         "type": "github"
       },
       "original": {
@@ -502,11 +517,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1767767207,
-        "narHash": "sha256-Mj3d3PfwltLmukFal5i3fFt27L6NiKXdBezC1EBuZs4=",
+        "lastModified": 1768564909,
+        "narHash": "sha256-Kell/SpJYVkHWMvnhqJz/8DqQg2b6PguxVWOuadbHCc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5912c1772a44e31bf1c63c0390b90501e5026886",
+        "rev": "e4bae1bd10c9c57b2cf517953ab70060a828ee6f",
         "type": "github"
       },
       "original": {
@@ -567,11 +582,11 @@
     "pup": {
       "flake": false,
       "locked": {
-        "lastModified": 1767854342,
-        "narHash": "sha256-e0nclTJyJ1jFPitFKiPprQsI2+mPu/tI/ubEPX1iftE=",
+        "lastModified": 1767926553,
+        "narHash": "sha256-sST9+O6loyl+sEdgwcQI9Htf6NoPEi5kLfjsk0S/Ob8=",
         "owner": "tweag",
         "repo": "pup",
-        "rev": "da645da06bd60b41c8344703524a9273662c9fe4",
+        "rev": "ea9d9d36d53adc8a7973a7fd053ba8b34d90c291",
         "type": "github"
       },
       "original": {
@@ -757,11 +772,11 @@
     "stacked": {
       "flake": false,
       "locked": {
-        "lastModified": 1767854074,
-        "narHash": "sha256-vo9qEliC/7QFj0KMoknxJW44wN0ChKrredBfzMko2qQ=",
+        "lastModified": 1767860196,
+        "narHash": "sha256-At0iPt+dGgeqn5NHYN8cuffcI979z5PZshrfim2AfFc=",
         "owner": "tweag",
         "repo": "stacked",
-        "rev": "84194bb64064254b642ef6e1f4cffb0ee882244f",
+        "rev": "f5ab1c8723ede3afada8d981851c8a5b513e8d27",
         "type": "github"
       },
       "original": {
@@ -914,6 +929,7 @@
     },
     "web-font-mdi": {
       "inputs": {
+        "ghc-source-gen": "ghc-source-gen",
         "mdi": [
           "dashi",
           "mdi"
@@ -924,11 +940,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760476982,
-        "narHash": "sha256-cAI06jFZMVpOGc1ST6QE13UcgSQCDVk2IFZNPnZW4yo=",
+        "lastModified": 1768292899,
+        "narHash": "sha256-7ZVUVRWn1Uvq51dEIItnUIIhAevQjqB5PRwXitEfKIk=",
         "owner": "ners",
         "repo": "web-font-mdi",
-        "rev": "d27445551da07b18c6d300e81d23c4658a43cc53",
+        "rev": "7cb587ca67f1ccbf77153a986ca2a44331b0e779",
         "type": "github"
       },
       "original": {
