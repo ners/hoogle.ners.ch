@@ -12,10 +12,7 @@
     };
     dashi = {
       url = "github:ners/dashi";
-      inputs = {
-        miso.follows = "miso";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     dosh = {
       url = "github:ners/dosh/rhine";
@@ -61,10 +58,6 @@
       url = "github:tusharad/langchain-hs";
       flake = false;
     };
-    miso = {
-      url = "github:haskell-miso/miso";
-      flake = false;
-    };
     ollama-haskell = {
       url = "github:tusharad/ollama-haskell";
       flake = false;
@@ -82,7 +75,7 @@
       flake = false;
     };
     rhine = {
-      url = "github:ners/rhine/update";
+      url = "github:turion/rhine";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rhine-chat = {
@@ -239,14 +232,6 @@
                   lens-process = doJailbreak (addSetupDepend hprev.cabal-doctest hprev.lens-process);
                   ollama-haskell = hfinal.callCabal2nix "ollama-haskell" inputs.ollama-haskell { };
                   langchain-hs = dontCheck (hfinal.callCabal2nix "langchain-hs" inputs.langchain-hs { });
-                  #openai = dontCheck (hfinal.callHackageDirect
-                  #  {
-                  #    pkg = "openai";
-                  #    ver = "2.2.1";
-                  #    sha256 = "sha256-4JOUrXV4Zixu+T7q4O9V3mwacyG+t86L9htBPowlTC0=";
-                  #  }
-                  #  { });
-                  miso = hfinal.callCabal2nix "miso" inputs.miso { };
                   monomer-hagrid = doJailbreak hprev.monomer-hagrid;
                   tmp-postgres = dontCheck (hfinal.callCabal2nix "tmp-postgres"
                     (prev.fetchFromGitHub {
@@ -266,6 +251,18 @@
                   opus = addPkgconfigDepend prev.libopus (hfinal.callCabal2nix "opus" inputs.opus { });
                   postgres-effectful = dontCheck (doJailbreak (hfinal.callCabal2nix "postgres-effectful" inputs.postgres-effectful { }));
                   stacked = hprev.callCabal2nix "stacked" inputs.stacked { };
+                  portray-diff = doJailbreak hprev.portray-diff;
+                  portray-pretty = doJailbreak hprev.portray-pretty;
+                  portray-prettyprinter = doJailbreak (
+                    hfinal.callHackageDirect
+                    {
+                      pkg = "portray-prettyprinter";
+                      ver = "0.2.1";
+                      sha256 = "sha256-YQ67idnC69SQpI/9NXGqwoUamDae7xhcjGWhcZtCjqM=";
+                    }
+                    { });
+                  portray-diff-quickcheck = doJailbreak hprev.portray-diff-quickcheck;
+                  portray-diff-hunit = doJailbreak hprev.portray-diff-hunit;
                   pup = hprev.callCabal2nix "pup" inputs.pup { };
                   hasql-effectful = setBuildTarget "hasql-effectful" (dontCheck (doJailbreak hprev.hasql-effectful));
                   hasql-migration = dontCheck (hprev.callCabal2nix "hasql-migration" inputs.hasql-migration { });
@@ -287,6 +284,13 @@
                       sed -i 's/acquire (toConnectionString db)/acquire [connection . string . decodeUtf8 . toConnectionString $ db]/' benchmarks/Main.hs
                     '';
                   });
+                  capnp = dontCheck (doJailbreak (hprev.capnp.overrideAttrs (attrs: {
+                    postPatch = ''
+                      ${attrs.postPatch or ""}
+                      sed -i 's/^module /{-# LANGUAGE DuplicateRecordFields #-}\n&/' lib/Capnp/GenHelpers/Rpc.hs
+                    '';
+                  })));
+                  identicon-style-squares = doJailbreak hprev.identicon-style-squares;
                   co-log-effectful = doJailbreak (hfinal.callCabal2nix "co-log-effectful" inputs.co-log-effectful { });
                   qrcode-juicypixels = doJailbreak hprev.qrcode-juicypixels;
                   servant-effectful = doJailbreak (hfinal.callCabal2nix "servant-effectful" inputs.servant-effectful { });
@@ -350,8 +354,10 @@
           #ekg-log
           #fir
           #g2q
+          #persistent-ratelimit
           #sdl2-image
           #sdl2-mixer
+          #servant-avro
           #servant-dhall
           #servant-oauth2
           #wai-middleware-auth
@@ -371,6 +377,7 @@
           ansi-terminal
           attoparsec
           avatar-generator
+          avro
           bench-show
           blaze-htmx
           bluefin-algae
@@ -380,6 +387,7 @@
           brick-skylighting
           bson-generic
           bson-lens
+          capnp
           clash-ghc
           clash-shake
           co-log-effectful
@@ -461,6 +469,7 @@
           hs-opentelemetry-instrumentation-wai
           hs-opentelemetry-utils-exceptions
           hspec
+          hspec-expectations-pretty-diff
           hspec-webdriver
           htmx-servant
           http-media
@@ -502,7 +511,9 @@
           microlens
           microlens-th
           mighttpd2
+          minio-hs
           miso
+          mockery
           monad-control
           monad-effect
           monad-logger
@@ -556,6 +567,10 @@
           pixelated-avatar-generator
           plot
           plots
+          portray-diff-hunit
+          portray-diff-quickcheck
+          portray-prettyprinter
+          possible
           postgres-effectful
           pretty-simple
           pretty-sop
@@ -592,6 +607,7 @@
           rio
           science-constants-dimensional
           sdl2-ttf
+          sdr
           servant-blaze
           servant-client
           servant-effectful
