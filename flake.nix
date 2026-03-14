@@ -190,7 +190,6 @@
                       sha256 = "sha256-4/O93bE21wTxN/LNWpDmr17o3bo+Xhq1qoB8qG6cq+E=";
                     }
                     { };
-                  ihaskell-dataframe = doJailbreak hprev.ihaskell-dataframe;
                   discord-haskell-voice = addBuildDepend hfinal.opus hprev.discord-haskell-voice;
                   e11y-otel = dontCheck (doJailbreak hprev.e11y-otel);
                   fclabels = hfinal.callCabal2nix "fclabels" inputs.fclabels { };
@@ -349,11 +348,13 @@
         in
         map fixPackage [
           #crem
+          #dataframe-hasktorch
           #discord-haskell-voice
           #ekg-elasticsearch
           #ekg-log
           #fir
           #g2q
+          #ihaskell-dataframe
           #persistent-ratelimit
           #sdl2-image
           #sdl2-mixer
@@ -401,7 +402,6 @@
           data-default
           data-fix
           data-textual
-          dataframe-hasktorch
           deepseq-generics
           dhall
           dhall-csv
@@ -476,7 +476,6 @@
           http-types
           i3ipc
           identicon-style-squares
-          ihaskell-dataframe
           inline-c
           inline-c-cpp
           io-classes
@@ -547,7 +546,7 @@
           optparse-simple
           optparse-th
           os-release
-          os-string_2_0_8
+          os-string_2_0_10
           pango
           parsable
           parser-combinators
