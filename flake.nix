@@ -183,13 +183,13 @@
                     {
                       random = hprev.random_1_3_1;
                     };
-                  dataframe = hfinal.callHackageDirect
-                    {
-                      pkg = "dataframe";
-                      ver = "0.3.3.6";
-                      sha256 = "sha256-4/O93bE21wTxN/LNWpDmr17o3bo+Xhq1qoB8qG6cq+E=";
-                    }
-                    { };
+                  #dataframe = hfinal.callHackageDirect
+                  #  {
+                  #    pkg = "dataframe";
+                  #    ver = "0.3.3.6";
+                  #    sha256 = "sha256-4/O93bE21wTxN/LNWpDmr17o3bo+Xhq1qoB8qG6cq+E=";
+                  #  }
+                  #  { };
                   discord-haskell-voice = addBuildDepend hfinal.opus hprev.discord-haskell-voice;
                   e11y-otel = dontCheck (doJailbreak hprev.e11y-otel);
                   fclabels = hfinal.callCabal2nix "fclabels" inputs.fclabels { };
@@ -452,7 +452,10 @@
           hashable
           haskell-modbus
           hasql
+          hasql-dynamic-statements
           hasql-effectful
+          hasql-implicits
+          hasql-interpolate
           hasql-migration
           hasql-mover
           hasql-queue
@@ -496,6 +499,7 @@
           lens-family-th
           lens-process
           lens-regex
+          lens-regex-pcre
           lens-time
           libmodbus
           libravatar
@@ -591,6 +595,8 @@
           rattle
           rediscaching-haxl
           regex-applicative-text
+          regex-pcre
+          regex-pcre2
           rel8
           replace-attoparsec
           resource-effectful
