@@ -358,6 +358,7 @@
           #persistent-ratelimit
           #sdl2-image
           #sdl2-mixer
+          #sdr
           #servant-avro
           #servant-dhall
           #servant-oauth2
@@ -471,7 +472,9 @@
           hs-opentelemetry-instrumentation-tasty
           hs-opentelemetry-instrumentation-wai
           hs-opentelemetry-utils-exceptions
-          hspec
+          hspec-expectations-json
+          hspec-expectations-lens
+          hspec-expectations-lifted
           hspec-expectations-pretty-diff
           hspec-webdriver
           htmx-servant
@@ -593,6 +596,7 @@
           random-fu
           rasterific-svg
           rattle
+          rebase
           rediscaching-haxl
           regex-applicative-text
           regex-pcre
@@ -612,7 +616,6 @@
           rio
           science-constants-dimensional
           sdl2-ttf
-          sdr
           servant-blaze
           servant-client
           servant-effectful
