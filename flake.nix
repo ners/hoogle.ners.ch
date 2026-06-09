@@ -149,6 +149,7 @@
             haskell = prev.haskell // {
               packageOverrides = lib.composeManyExtensions [
                 prev.haskell.packageOverrides
+                (import ./overlays/hoogle prev)
                 inputs.dosh.overlays.haskell
                 (hfinal: hprev: {
                   bluefin = hfinal.callHackageDirect
@@ -701,6 +702,12 @@
           services.hoogle = {
             inherit (pkgs') haskellPackages;
             packages = _: packagesFor pkgs';
+          };
+
+          services.nginx.virtualHosts."hoogle.ners.ch".locations = {
+            "~ linuwial\\.css$".alias = ./overlays/hoogle/linuwial.css;
+            "~ quick-jump\\.css$".alias = ./overlays/hoogle/quick-jump.css;
+            "~ /src/style\\.css$".alias = ./overlays/hoogle/style.css;
           };
         };
     in
