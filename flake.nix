@@ -17,6 +17,7 @@
     dosh = {
       url = "github:ners/dosh/rhine";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rhine.follows = "rhine";
     };
     dramaturge = {
       url = "github:ners/dramaturge";
@@ -54,10 +55,6 @@
       url = "github:kubernetes-client/haskell";
       flake = false;
     };
-    langchain-hs = {
-      url = "github:tusharad/langchain-hs";
-      flake = false;
-    };
     ollama-haskell = {
       url = "github:tusharad/ollama-haskell";
       flake = false;
@@ -86,12 +83,8 @@
       url = "github:ners/rhine-linux";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rhine-sdl2 = {
-      url = "github:ners/rhine-sdl2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     servant-effectful = {
-      url = "github:Diamondy4/servant-effectful";
+      url = "github:Kleidukos/servant-effectful";
       flake = false;
     };
     stacked = {
@@ -148,7 +141,6 @@
           inputs.rhine.overlays.default
           inputs.rhine-chat.overlays.default
           inputs.rhine-linux.overlays.default
-          inputs.rhine-sdl2.overlays.default
           inputs.syntax.overlays.default
           inputs.vodozemac.overlays.default
           inputs.dashi.overlays.default
@@ -162,19 +154,19 @@
                   bluefin = hfinal.callHackageDirect
                     {
                       pkg = "bluefin";
-                      ver = "0.2.6.0";
-                      sha256 = "sha256-qZuiA7NU+yL78QdzFHTAgTIT7VRTJ/fyl4NDormDOOA=";
+                      ver = "0.6.0.0";
+                      sha256 = "sha256-qRi8+HodM7MmpVRGW0ocR98pRywE0392vnWWAcPUobc=";
                     }
                     { };
                   bluefin-algae = doJailbreak hprev.bluefin-algae;
                   bluefin-internal = hfinal.callHackageDirect
                     {
                       pkg = "bluefin-internal";
-                      ver = "0.3.4.0";
-                      sha256 = "sha256-vLgbSsD0ycB67ihWLtJTK+mOk7ZpkOdzGBANUWHpMYY=";
+                      ver = "0.6.0.0";
+                      sha256 = "sha256-Eon7vMQ7YiuoRqRga7V7mKb/LXZI9HmykTOvISVIkN0=";
                     }
                     { };
-                  bluefin-random = hfinal.callHackageDirect
+                  bluefin-random = doJailbreak (hfinal.callHackageDirect
                     {
                       pkg = "bluefin-random";
                       ver = "0.2.0.0";
@@ -182,14 +174,7 @@
                     }
                     {
                       random = hprev.random_1_3_1;
-                    };
-                  #dataframe = hfinal.callHackageDirect
-                  #  {
-                  #    pkg = "dataframe";
-                  #    ver = "0.3.3.6";
-                  #    sha256 = "sha256-4/O93bE21wTxN/LNWpDmr17o3bo+Xhq1qoB8qG6cq+E=";
-                  #  }
-                  #  { };
+                    });
                   discord-haskell-voice = addBuildDepend hfinal.opus hprev.discord-haskell-voice;
                   e11y-otel = dontCheck (doJailbreak hprev.e11y-otel);
                   fclabels = hfinal.callCabal2nix "fclabels" inputs.fclabels { };
@@ -230,7 +215,6 @@
                   ];
                   lens-process = doJailbreak (addSetupDepend hprev.cabal-doctest hprev.lens-process);
                   ollama-haskell = hfinal.callCabal2nix "ollama-haskell" inputs.ollama-haskell { };
-                  langchain-hs = dontCheck (hfinal.callCabal2nix "langchain-hs" inputs.langchain-hs { });
                   monomer-hagrid = doJailbreak hprev.monomer-hagrid;
                   tmp-postgres = dontCheck (hfinal.callCabal2nix "tmp-postgres"
                     (prev.fetchFromGitHub {
@@ -240,15 +224,9 @@
                       hash = "sha256-OYmKDwrkrhcXkLxGN1NKCWcZ1VC/V+JSnjD5mEGb0AU=";
                     })
                     { });
-                  notifications-tray-icon = hprev.notifications-tray-icon.overrideAttrs (attrs: {
-                    postPatch = ''
-                      ${attrs.postPatch or ""}
-                      sed -i 's,GLib.mainContextInvokeFull context,GLib.mainContextInvokeFull (Just context),' src/StatusNotifier/Item/Notifications/OverlayIcon.hs
-                      sed -i 's,subjectURL \$ notificationSubject notification,fromJust $ &,' src/StatusNotifier/Item/Notifications/GitHub.hs
-                    '';
-                  });
                   opus = addPkgconfigDepend prev.libopus (hfinal.callCabal2nix "opus" inputs.opus { });
                   postgres-effectful = dontCheck (doJailbreak (hfinal.callCabal2nix "postgres-effectful" inputs.postgres-effectful { }));
+                  vulkan-utils = dontCheck hprev.vulkan-utils;
                   stacked = hprev.callCabal2nix "stacked" inputs.stacked { };
                   portray-diff = doJailbreak hprev.portray-diff;
                   portray-pretty = doJailbreak hprev.portray-pretty;
@@ -348,6 +326,7 @@
         in
         map fixPackage [
           #crem
+          #dataframe-fastcsv
           #dataframe-hasktorch
           #discord-haskell-voice
           #ekg-elasticsearch
@@ -496,7 +475,6 @@
           json-spec-openapi
           ki-effectful
           kubernetes-client
-          langchain-hs
           lawful-conversions
           lens
           lens-family-th
@@ -541,7 +519,6 @@
           net-mqtt-rpc
           network-ip
           nonempty-containers
-          notifications-tray-icon
           numhask
           numhask-space
           opaleye
@@ -609,7 +586,6 @@
           rhine-dbus
           rhine-i3
           rhine-inotify
-          rhine-sdl2
           rhine-terminal
           rhine-udev
           rhine-v4l2
