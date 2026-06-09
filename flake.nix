@@ -252,16 +252,6 @@
                       hash = "sha256-+z3VDkoqdFXiUNA/GErF2QOPbcySUhZEPbFZWcj+T/E=";
                     })
                     { });
-                  hasql-queue = hprev.hasql-queue.overrideAttrs (attrs: {
-                    patchPhase = ''
-                      ${attrs.patchPhase or ""}
-                      sed -i 's/QueryError/SessionError/g' src/Hasql/Queue/Internal.hs
-                      echo "module Main where" | cat - hasql-queue-tmp-db/Main.hs | tee hasql-queue-tmp-db/Main.hs >/dev/null
-                      sed -i 's/module Main where/&\nimport Data.Text.Encoding (decodeUtf8)\nimport Hasql.Connection.Setting (connection)\nimport Hasql.Connection.Setting.Connection (string)/' benchmarks/Main.hs hasql-queue-tmp-db/Main.hs
-                      sed -i 's/acquire connStr/acquire [connection . string . decodeUtf8 $ connStr]/' benchmarks/Main.hs hasql-queue-tmp-db/Main.hs
-                      sed -i 's/acquire (toConnectionString db)/acquire [connection . string . decodeUtf8 . toConnectionString $ db]/' benchmarks/Main.hs
-                    '';
-                  });
                   capnp = dontCheck (doJailbreak (hprev.capnp.overrideAttrs (attrs: {
                     postPatch = ''
                       ${attrs.postPatch or ""}
@@ -439,7 +429,6 @@
           hasql-interpolate
           hasql-migration
           hasql-mover
-          hasql-queue
           hasql-th
           heftia-effects
           hermes-json
